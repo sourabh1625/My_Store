@@ -1,0 +1,1777 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+<title>Aashirya Haute Couture &amp; AI Virtual Try-On Studio</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "surface-dim": "#dbdad6",
+          "surface-container": "#efeeea",
+          "surface-container-high": "#eae8e4",
+          "surface-container-highest": "#e4e2de",
+          "surface": "#fbf9f5",
+          "surface-container-low": "#f5f3ef",
+          "surface-container-lowest": "#ffffff",
+          "primary": "#390009",
+          "primary-container": "#58111a",
+          "secondary": "#735c00",
+          "secondary-container": "#fed65b",
+          "on-secondary-container": "#745c00",
+          "on-surface": "#1b1c1a",
+          "on-surface-variant": "#554242",
+          "outline-variant": "#dac0c0",
+          "outline": "#877272"
+        },
+        fontFamily: {
+          "headline": ["Playfair Display", "serif"],
+          "body": ["Plus Jakarta Sans", "sans-serif"]
+        }
+      }
+    }
+  };
+</script>
+<style>
+  @layer base {
+    html, body { width: 100%; margin: 0; padding: 0; }
+    body { min-height: 100vh; }
+    .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+    .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+  }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-thumb { background: #dac0c0; border-radius: 9999px; }
+
+  @keyframes regalSpotlightGlow {
+    0% {
+      box-shadow: 0 0 0 0 rgba(88, 17, 26, 0.45);
+      outline: 3px solid rgba(88, 17, 26, 0.65);
+      transform: translateY(-2px);
+    }
+    50% {
+      box-shadow: 0 10px 30px -4px rgba(88, 17, 26, 0.35), 0 0 25px rgba(254, 214, 91, 0.45);
+      outline: 3px solid rgba(115, 92, 0, 0.6);
+      transform: translateY(-4px);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(88, 17, 26, 0);
+      outline: 2px solid transparent;
+      transform: translateY(0);
+    }
+  }
+  .regal-spotlight-active {
+    animation: regalSpotlightGlow 1.25s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  }
+</style>
+</head>
+<body class="bg-surface font-body text-on-surface flex flex-col min-h-screen">
+<!-- Header -->
+<header class="sticky top-0 z-40 bg-surface/95 backdrop-blur-md border-b border-outline-variant/30 shadow-[0_1px_12px_rgba(88,17,26,0.06)] pt-safe" id="main-header">
+<div class="max-w-7xl mx-auto h-20 px-4 md:px-8 flex items-center justify-between gap-4">
+<div class="flex items-center gap-3 cursor-pointer" onclick="resetToHome()">
+<div class="w-10 h-10 rounded-full bg-primary-container text-amber-200 flex items-center justify-center font-headline text-xl font-bold shadow-md">A</div>
+<div class="flex flex-col">
+<span class="font-headline text-xl md:text-2xl tracking-[0.16em] text-primary font-bold">AASHIRYA</span>
+<span class="text-[10px] tracking-[0.16em] uppercase text-secondary font-semibold">Haute Couture &amp; AI Studio</span>
+</div>
+</div>
+<div class="flex items-center gap-3 sm:gap-4 ml-auto">
+<div class="flex items-center gap-3 bg-surface-container-low/80 border border-outline-variant/30 rounded-full py-1.5 px-2.5 sm:px-3 shadow-xs">
+<div class="relative flex-shrink-0 group cursor-pointer" onclick="openOwnerPortraitLightbox()" title="Click to view full portrait">
+<img alt="Atelier Owner &amp; Creative Director" class="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-cover border-2 border-secondary-container shadow-sm group-hover:scale-105 group-hover:border-amber-400 group-hover:shadow-md transition-all duration-300" src="https://lh3.googleusercontent.com/aida/ALJJyrBjSVwN4BFU0FUFQgFTZFpj1-7SiOX_1n7pM9MhT0hdXhAW8Ms6zLffYyl-vPeuCYEreJm2k0dR220PJb8adwgnGWfFrAF-HZG5gpn28oPGZA2zov2U1ow7DzoaiW_dZ8MglOC1lvssQqDlnEeC__mLVEJOYpxx5E7y7df_1lFae3edXd7bBhHR06ENchW6-FcDsxOigRCjrColRmeTMOsmCwQZ_HaSAUBXECAmfq54">
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-white"></span>
+<div class="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-black/85 text-amber-200 text-[9px] whitespace-nowrap px-2 py-0.5 rounded shadow pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity z-10 hidden sm:block">
+  Click to zoom portrait
+</div>
+</div>
+<div class="flex flex-col text-left cursor-pointer" onclick="openOwnerPortraitLightbox()" title="Click to view full portrait">
+<div class="flex items-center gap-1.5">
+<span class="font-headline text-xs sm:text-sm font-bold text-primary leading-tight hover:text-primary-container transition-colors">Aashirya S.</span>
+<span class="hidden md:inline-block text-[9px] uppercase tracking-wider bg-secondary-container/60 text-secondary font-bold px-1.5 py-0.2 rounded-full">Master Couturier</span>
+</div>
+<span class="text-[10px] text-on-surface-variant font-medium">Founder &amp; Creative Director</span>
+</div>
+</div>
+<a class="inline-flex items-center gap-2 bg-[#58111A] hover:bg-primary text-white px-4 py-2 rounded-full shadow-md hover:shadow-lg transition-all duration-300 border border-amber-300/40 group flex-shrink-0" href="tel:8109684478" title="Call Atelier: +91 8109684478"><span class="material-symbols-outlined text-[17px] text-amber-200 group-hover:scale-110 transition-transform duration-300">call</span><span class="font-headline text-[11px] sm:text-xs font-bold tracking-wider uppercase text-white">CONTACT ATELIER: 8109684478</span></a></div>
+</div>
+</header>
+<!-- Main Layout -->
+<main class="flex-1 max-w-7xl mx-auto w-full px-4 md:px-8 py-6">
+<!-- Top Heritage Notice Bar -->
+<div class="mb-6 rounded-xl bg-surface-container-low border border-outline-variant/30 px-4 py-2.5 flex items-center justify-between text-xs">
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-[16px]">stars</span>
+<span class="text-[11px] uppercase tracking-widest font-bold">Imperial Handloom Archive • All 7 Royal Departments with Dynamic AI Fit</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="hidden sm:inline text-secondary font-medium">Auto Garment Boundary Segmentation Active</span>
+<span class="text-on-surface-variant font-medium tracking-wider">Winter / Festive 2025</span>
+</div>
+</div>
+<div class="flex flex-col md:flex-row md:items-start md:gap-8">
+<!-- Left Sidebar: Categories Accordion -->
+<aside class="w-full md:w-80 lg:w-88 flex-shrink-0 md:sticky md:top-28 mb-6 md:mb-0">
+<div class="bg-surface-container-low rounded-2xl p-3 sm:p-4 space-y-2 shadow-sm border border-outline-variant/30">
+<div class="flex items-center justify-between px-2 py-1 pb-2 border-b border-outline-variant/25">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">account_balance</span>
+<span class="text-xs uppercase tracking-wider text-on-surface-variant font-bold">Royal Departments</span>
+</div>
+<span class="text-[10px] text-secondary font-bold bg-secondary-container/60 px-2.5 py-0.5 rounded-full">7 Categories</span>
+</div>
+<div class="space-y-1.5" id="category-sidebar-list"><div class="bg-surface-container-lowest rounded-xl p-3 border transition-all border-primary/40 shadow-xs" id="cat-card-sarees">
+        <button onclick="toggleCategoryAccordion('sarees')" class="w-full flex items-center justify-between text-left focus:outline-none">
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-full bg-[#58111A] text-white flex items-center justify-center text-sm flex-shrink-0 shadow-xs">
+              <span class="material-symbols-outlined text-[17px]">dresser</span>
+            </span>
+            <div>
+              <p class="font-headline text-sm font-bold text-primary leading-tight">1. Women's Sarees</p>
+              <p class="text-[10px] text-secondary font-medium">Active: Banarasi Sarees</p>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-lg text-primary">expand_less</span>
+        </button>
+        <div class="flex mt-2.5 pt-2 border-t border-outline-variant/15 flex-wrap gap-1.5" id="pills-sarees">
+          
+          <button onclick="selectSubcategory('sarees', 'banarasi', event)" class="px-2.5 py-1 rounded-full text-xs transition-all bg-[#58111A] text-white font-bold shadow-xs ring-1 ring-amber-300/40">
+            Banarasi Sarees
+          </button>
+        
+          <button onclick="selectSubcategory('sarees', 'silk', event)" class="px-2.5 py-1 rounded-full text-xs transition-all bg-surface-container text-on-surface hover:text-primary hover:bg-surface-container-high font-medium">
+            Silk Sarees
+          </button>
+        
+          <button onclick="selectSubcategory('sarees', 'cotton', event)" class="px-2.5 py-1 rounded-full text-xs transition-all bg-surface-container text-on-surface hover:text-primary hover:bg-surface-container-high font-medium">
+            Cotton Sarees
+          </button>
+        
+          <button onclick="selectSubcategory('sarees', 'kanjivaram', event)" class="px-2.5 py-1 rounded-full text-xs transition-all bg-surface-container text-on-surface hover:text-primary hover:bg-surface-container-high font-medium">
+            Kanjivaram Sarees
+          </button>
+        
+          <button onclick="selectSubcategory('sarees', 'designer', event)" class="px-2.5 py-1 rounded-full text-xs transition-all bg-surface-container text-on-surface hover:text-primary hover:bg-surface-container-high font-medium">
+            Designer Sarees
+          </button>
+        
+        </div>
+      </div><div class="bg-surface-container-lowest rounded-xl p-3 border transition-all border-transparent" id="cat-card-kurta">
+        <button onclick="toggleCategoryAccordion('kurta')" class="w-full flex items-center justify-between text-left focus:outline-none">
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center text-sm flex-shrink-0 shadow-xs">
+              <span class="material-symbols-outlined text-[17px]">apparel</span>
+            </span>
+            <div>
+              <p class="font-headline text-sm font-bold text-on-surface leading-tight">2. Women's Kurta Sets</p>
+              <p class="text-[10px] text-secondary font-medium"></p>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-lg text-on-surface-variant">expand_more</span>
+        </button>
+        <div class="hidden mt-2.5 pt-2 border-t border-outline-variant/15 flex-wrap gap-1.5" id="pills-kurta">
+          
+          <button onclick="selectSubcategory('kurta', 'anarkali', event)" class="px-2.5 py-1 rounded-full text-xs transition-all bg-surface-container text-on-surface hover:text-primary hover:bg-surface-container-high font-medium">
+            Anarkali Sets
+          </button>
+        
+          <button onclick="selectSubcategory('kurta', 'straight', event)" class="px-2.5 py-1 rounded-full text-xs transition-all bg-surface-container text-on-surface hover:text-primary hover:bg-surface-container-high font-medium">
+            Straight Cut
+          </button>
+        
+          <button onclick="selectSubcategory('kurta', 'angrakha', event)" class="px-2.5 py-1 rounded-full text-xs transition-all bg-surface-container text-on-surface hover:text-primary hover:bg-surface-container-high font-medium">
+            Angrakha
+          </button>
+        
+          <button onclick="selectSubcategory('kurta', 'peplum', event)" class="px-2.5 py-1 rounded-full text-xs transition-all bg-surface-container text-on-surface hover:text-primary hover:bg-surface-container-high font-medium">
+            Peplum Sets
+          </button>
+        
+        </div>
+      </div><div class="bg-surface-container-lowest rounded-xl p-3 border transition-all border-transparent" id="cat-card-palazzo">
+        <button onclick="toggleCategoryAccordion('palazzo')" class="w-full flex items-center justify-between text-left focus:outline-none">
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center text-sm flex-shrink-0 shadow-xs">
+              <span class="material-symbols-outlined text-[17px]">styler</span>
+            </span>
+            <div>
+              <p class="font-headline text-sm font-bold text-on-surface leading-tight">3. Girls' Palazzo</p>
+              <p class="text-[10px] text-secondary font-medium"></p>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-lg text-on-surface-variant">expand_more</span>
+        </button>
+        <div class="hidden mt-2.5 pt-2 border-t border-outline-variant/15 flex-wrap gap-1.5" id="pills-palazzo">
+          
+          <button onclick="selectSubcategory('palazzo', 'flared', event)" class="px-2.5 py-1 rounded-full text-xs transition-all bg-surface-container text-on-surface hover:text-primary hover:bg-surface-container-high font-medium">
+            Flared Palazzos
+          </button>
+        
+          <button onclick="selectSubcategory('palazzo', 'sharara', event)" class="px-2.5 py-1 rounded-full text-xs transition-all bg-surface-container text-on-surface hover:text-primary hover:bg-surface-container-high font-medium">
+            Sharara Cut
+          </button>
+        
+          <button onclick="selectSubcategory('palazzo', 'embroidered', event)" class="px-2.5 py-1 rounded-full text-xs transition-all bg-surface-container text-on-surface hover:text-primary hover:bg-surface-container-high font-medium">
+            Embroidered Palazzos
+          </button>
+        
+        </div>
+      </div><div class="bg-surface-container-lowest rounded-xl p-3 border transition-all border-transparent" id="cat-card-kurta-palazzo">
+        <button onclick="toggleCategoryAccordion('kurta-palazzo')" class="w-full flex items-center justify-between text-left focus:outline-none">
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center text-sm flex-shrink-0 shadow-xs">
+              <span class="material-symbols-outlined text-[17px]">style</span>
+            </span>
+            <div>
+              <p class="font-headline text-sm font-bold text-on-surface leading-tight">4. Kurta-Palazzo Sets</p>
+              <p class="text-[10px] text-secondary font-medium"></p>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-lg text-on-surface-variant">expand_more</span>
+        </button>
+        <div class="hidden mt-2.5 pt-2 border-t border-outline-variant/15 flex-wrap gap-1.5" id="pills-kurta-palazzo">
+          
+          <button onclick="selectSubcategory('kurta-palazzo', 'chanderi-sets', event)" class="px-2.5 py-1 rounded-full text-xs transition-all bg-surface-container text-on-surface hover:text-primary hover:bg-surface-container-high font-medium">
+            Awadh Chanderi Sets
+          </button>
+        
+          <button onclick="selectSubcategory('kurta-palazzo', 'velvet-sets', event)" class="px-2.5 py-1 rounded-full text-xs transition-all bg-surface-container text-on-surface hover:text-primary hover:bg-surface-container-high font-medium">
+            Velvet Festive Sets
+          </button>
+        
+          <button onclick="selectSubcategory('kurta-palazzo', 'chikankari-sets', event)" class="px-2.5 py-1 rounded-full text-xs transition-all bg-surface-container text-on-surface hover:text-primary hover:bg-surface-container-high font-medium">
+            Lucknowi Chikankari
+          </button>
+        
+          <button onclick="selectSubcategory('kurta-palazzo', 'bandhani-sets', event)" class="px-2.5 py-1 rounded-full text-xs transition-all bg-surface-container text-on-surface hover:text-primary hover:bg-surface-container-high font-medium">
+            Bandhani Silk Sets
+          </button>
+        
+        </div>
+      </div><div class="bg-surface-container-lowest rounded-xl p-3 border transition-all border-transparent" id="cat-card-dupatta">
+        <button onclick="toggleCategoryAccordion('dupatta')" class="w-full flex items-center justify-between text-left focus:outline-none">
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center text-sm flex-shrink-0 shadow-xs">
+              <span class="material-symbols-outlined text-[17px]">filter_vintage</span>
+            </span>
+            <div>
+              <p class="font-headline text-sm font-bold text-on-surface leading-tight">5. Dupatta</p>
+              <p class="text-[10px] text-secondary font-medium"></p>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-lg text-on-surface-variant">expand_more</span>
+        </button>
+        <div class="hidden mt-2.5 pt-2 border-t border-outline-variant/15 flex-wrap gap-1.5" id="pills-dupatta">
+          
+          <button onclick="selectSubcategory('dupatta', 'banarasi-silk', event)" class="px-2.5 py-1 rounded-full text-xs transition-all bg-surface-container text-on-surface hover:text-primary hover:bg-surface-container-high font-medium">
+            Banarasi Silk
+          </button>
+        
+          <button onclick="selectSubcategory('dupatta', 'kashmiri-tilla', event)" class="px-2.5 py-1 rounded-full text-xs transition-all bg-surface-container text-on-surface hover:text-primary hover:bg-surface-container-high font-medium">
+            Kashmiri Tilla
+          </button>
+        
+          <button onclick="selectSubcategory('dupatta', 'bandhani', event)" class="px-2.5 py-1 rounded-full text-xs transition-all bg-surface-container text-on-surface hover:text-primary hover:bg-surface-container-high font-medium">
+            Bandhani
+          </button>
+        
+          <button onclick="selectSubcategory('dupatta', 'organza', event)" class="px-2.5 py-1 rounded-full text-xs transition-all bg-surface-container text-on-surface hover:text-primary hover:bg-surface-container-high font-medium">
+            Organza
+          </button>
+        
+        </div>
+      </div><div class="bg-surface-container-lowest rounded-xl p-3 border transition-all border-transparent" id="cat-card-night">
+        <button onclick="toggleCategoryAccordion('night')" class="w-full flex items-center justify-between text-left focus:outline-none">
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center text-sm flex-shrink-0 shadow-xs">
+              <span class="material-symbols-outlined text-[17px]">bedtime</span>
+            </span>
+            <div>
+              <p class="font-headline text-sm font-bold text-on-surface leading-tight">6. Girls' Night Dresses</p>
+              <p class="text-[10px] text-secondary font-medium"></p>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-lg text-on-surface-variant">expand_more</span>
+        </button>
+        <div class="hidden mt-2.5 pt-2 border-t border-outline-variant/15 flex-wrap gap-1.5" id="pills-night">
+          
+          <button onclick="selectSubcategory('night', 'mulmul-gowns', event)" class="px-2.5 py-1 rounded-full text-xs transition-all bg-surface-container text-on-surface hover:text-primary hover:bg-surface-container-high font-medium">
+            Pure Mulmul Gowns
+          </button>
+        
+          <button onclick="selectSubcategory('night', 'satin-robes', event)" class="px-2.5 py-1 rounded-full text-xs transition-all bg-surface-container text-on-surface hover:text-primary hover:bg-surface-container-high font-medium">
+            Silk Satin Robes
+          </button>
+        
+          <button onclick="selectSubcategory('night', 'cotton-loungewear', event)" class="px-2.5 py-1 rounded-full text-xs transition-all bg-surface-container text-on-surface hover:text-primary hover:bg-surface-container-high font-medium">
+            Cotton Loungewear
+          </button>
+        
+        </div>
+      </div><div class="bg-surface-container-lowest rounded-xl p-3 border transition-all border-transparent" id="cat-card-gowns">
+        <button onclick="toggleCategoryAccordion('gowns')" class="w-full flex items-center justify-between text-left focus:outline-none">
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center text-sm flex-shrink-0 shadow-xs">
+              <span class="material-symbols-outlined text-[17px]">dry_cleaning</span>
+            </span>
+            <div>
+              <p class="font-headline text-sm font-bold text-on-surface leading-tight">7. Women's Gowns</p>
+              <p class="text-[10px] text-secondary font-medium"></p>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-lg text-on-surface-variant">expand_more</span>
+        </button>
+        <div class="hidden mt-2.5 pt-2 border-t border-outline-variant/15 flex-wrap gap-1.5" id="pills-gowns">
+          
+          <button onclick="selectSubcategory('gowns', 'velvet-zardozi', event)" class="px-2.5 py-1 rounded-full text-xs transition-all bg-surface-container text-on-surface hover:text-primary hover:bg-surface-container-high font-medium">
+            Velvet Zardozi Gowns
+          </button>
+        
+          <button onclick="selectSubcategory('gowns', 'brocade-corset', event)" class="px-2.5 py-1 rounded-full text-xs transition-all bg-surface-container text-on-surface hover:text-primary hover:bg-surface-container-high font-medium">
+            Brocade Corset Gowns
+          </button>
+        
+          <button onclick="selectSubcategory('gowns', 'cape-gowns', event)" class="px-2.5 py-1 rounded-full text-xs transition-all bg-surface-container text-on-surface hover:text-primary hover:bg-surface-container-high font-medium">
+            Cape Gowns
+          </button>
+        
+        </div>
+      </div></div>
+</div>
+</aside>
+<!-- Right Column: Products & Filter Bar -->
+<div class="flex-1 min-w-0" id="catalog-main-content">
+<!-- Title & Breadcrumb -->
+<section class="mb-4 scroll-mt-28" id="catalog-header-section">
+<div class="flex items-center gap-1.5 text-on-surface-variant text-xs tracking-wider uppercase mb-1">
+<span>Catalog</span>
+<span class="material-symbols-outlined text-[12px]">chevron_right</span>
+<span class="font-medium" id="breadcrumb-category">Women's Sarees</span>
+<span class="material-symbols-outlined text-[12px]">chevron_right</span>
+<span class="text-primary font-bold" id="breadcrumb-subcategory">Banarasi Sarees</span>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 relative">
+<div>
+<h2 class="font-headline text-2xl md:text-3xl text-primary font-bold tracking-tight" id="display-title">Banarasi Sarees</h2>
+<p class="text-xs text-on-surface-variant mt-0.5" id="display-subtitle">Showing curated royal creations in Women's Sarees</p>
+</div>
+<!-- Refined Sort Control Pill (Matching Reference Design https://lh3.googleusercontent.com/aida-public/AB6AXuBVfKDzCW3jsa7r_bkCNXyxFlpRFKa3yYRqPQ_9rFvwFOt0yUInw3qJll_tykjCprqQdURTwHnxgMDPxcHnRfcawLmzIeidtQZx8qslknSZeRWwsoc6a-HMJlTZ47sBCyiVXQG7Uh9AkrE1pJcjwFC-AQkGN--5uPZhyyqiBlA17vANbN-QtgFpDGe_8Vzct2FiYQ7YTN16vQGlhJ-HQeAH5EWn_9N-wmFnj39e4t3uS7Xi4jcPTkYM) -->
+<div class="relative self-start sm:self-auto" id="sort-dropdown-container">
+<button class="h-10 px-5 rounded-full bg-[#E5E2DC] hover:bg-[#DDD8D0] text-[#1B1C1A] text-sm font-medium flex items-center gap-2.5 shadow-sm transition-all border border-neutral-300/40 focus:outline-none focus:ring-2 focus:ring-primary/20 select-none cursor-pointer" id="sort-pill-btn" onclick="toggleSortDropdown(event)">
+<!-- Double arrow up/down icon identical to reference -->
+<span class="material-symbols-outlined text-[18px] text-[#1B1C1A] font-semibold leading-none">swap_vert</span>
+<span class="tracking-tight font-medium text-[13.5px]" id="sort-label">Sort: Price (High-Low)</span>
+<span class="material-symbols-outlined text-[16px] text-neutral-500 transition-transform duration-200" id="sort-chevron-icon">expand_more</span>
+</button>
+<!-- Interactive Sort Dropdown Menu -->
+<div class="hidden absolute right-0 sm:right-0 left-0 sm:left-auto mt-1.5 w-56 bg-surface-container-lowest rounded-2xl shadow-xl border border-outline-variant/40 py-2 z-30 transition-all" id="sort-menu">
+<div class="px-3.5 py-1 text-[10px] font-bold uppercase tracking-wider text-secondary border-b border-outline-variant/15 mb-1">
+      Sort Products By
+    </div>
+<button class="w-full px-3.5 py-2 text-left text-xs flex items-center justify-between hover:bg-surface-container text-on-surface transition-colors group" id="opt-high-low" onclick="applySortOption('high-low')">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary group-hover:scale-110 transition-transform">arrow_downward</span>
+<span class="font-medium">Price (High to Low)</span>
+</span>
+<span class="material-symbols-outlined text-[16px] text-primary font-bold" id="check-high-low">check</span>
+</button>
+<button class="w-full px-3.5 py-2 text-left text-xs flex items-center justify-between hover:bg-surface-container text-on-surface transition-colors group" id="opt-low-high" onclick="applySortOption('low-high')">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary group-hover:scale-110 transition-transform">arrow_upward</span>
+<span class="font-medium">Price (Low to High)</span>
+</span>
+<span class="material-symbols-outlined text-[16px] text-primary font-bold hidden" id="check-low-high">check</span>
+</button>
+<button class="w-full px-3.5 py-2 text-left text-xs flex items-center justify-between hover:bg-surface-container text-on-surface transition-colors group" id="opt-curated" onclick="applySortOption('curated')">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary group-hover:scale-110 transition-transform">auto_awesome</span>
+<span class="font-medium">Curated / Featured</span>
+</span>
+<span class="material-symbols-outlined text-[16px] text-primary font-bold hidden" id="check-curated">check</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Subcategory Horizontal Chips Bar -->
+<section class="mb-5 overflow-x-auto pb-1">
+<div class="flex items-center gap-2" id="horizontal-chips-bar"><button class="px-3.5 py-1.5 rounded-full text-xs whitespace-nowrap transition-all flex items-center gap-1.5 bg-[#58111A] text-white font-bold shadow-xs ring-1 ring-amber-300/40"><span>Banarasi Sarees</span><span class="text-[10px] opacity-75">(5)</span></button><button class="px-3.5 py-1.5 rounded-full text-xs whitespace-nowrap transition-all flex items-center gap-1.5 bg-surface-container-low text-on-surface-variant hover:text-primary hover:bg-surface-container font-medium"><span>Silk Sarees</span><span class="text-[10px] opacity-75">(3)</span></button><button class="px-3.5 py-1.5 rounded-full text-xs whitespace-nowrap transition-all flex items-center gap-1.5 bg-surface-container-low text-on-surface-variant hover:text-primary hover:bg-surface-container font-medium"><span>Cotton Sarees</span><span class="text-[10px] opacity-75">(3)</span></button><button class="px-3.5 py-1.5 rounded-full text-xs whitespace-nowrap transition-all flex items-center gap-1.5 bg-surface-container-low text-on-surface-variant hover:text-primary hover:bg-surface-container font-medium"><span>Kanjivaram Sarees</span><span class="text-[10px] opacity-75">(3)</span></button><button class="px-3.5 py-1.5 rounded-full text-xs whitespace-nowrap transition-all flex items-center gap-1.5 bg-surface-container-low text-on-surface-variant hover:text-primary hover:bg-surface-container font-medium"><span>Designer Sarees</span><span class="text-[10px] opacity-75">(3)</span></button></div>
+</section>
+<!-- Products Grid -->
+<section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 mb-12 scroll-mt-28 transition-all duration-500 rounded-2xl p-1" id="product-container"><div data-product-card="true" class="group bg-surface-container-lowest rounded-2xl overflow-hidden border border-outline-variant/30 hover:border-primary/40 hover:shadow-lg transition-all flex flex-col" id="product-item-sb3">
+        <div class="relative aspect-[3/4] overflow-hidden bg-neutral-100">
+          <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Meenakari Shikargah Saree" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+            <span class="bg-black/60 backdrop-blur-md text-white text-[9px] uppercase tracking-wider font-bold px-2 py-0.5 rounded">Meenakari Silk</span><span class="bg-black/60 backdrop-blur-md text-white text-[9px] uppercase tracking-wider font-bold px-2 py-0.5 rounded">Shikargah Guild</span>
+          </div>
+          <span class="absolute bottom-3 left-3 bg-primary-container text-amber-200 text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">
+            240 HRS WEAVE
+          </span>
+          <div class="absolute top-3 right-3 flex flex-col gap-1.5">
+            <button class="w-8 h-8 rounded-full bg-white/90 text-primary flex items-center justify-center hover:bg-white shadow">
+              <span class="material-symbols-outlined text-base">favorite</span>
+            </button>
+          </div>
+        </div>
+        <div class="p-4 flex-1 flex flex-col justify-between">
+          <div>
+            <div class="flex items-baseline justify-between gap-2">
+              <h3 class="font-headline text-base font-bold text-primary group-hover:text-primary-container leading-tight">Meenakari Shikargah Saree</h3>
+              <span class="font-bold text-sm text-primary flex-shrink-0">₹48,000</span>
+            </div>
+            <div class="flex items-center gap-1.5 mt-0.5">
+              <span class="text-[10px] text-amber-900 bg-amber-100/80 font-bold px-2 py-0.2 rounded">Saree (Drape + Blouse)</span>
+              <p class="text-[11px] text-secondary font-medium line-clamp-1">Imperial Hunting Motif Handloom Masterpiece</p>
+            </div>
+            <p class="text-xs text-on-surface-variant mt-1.5 line-clamp-2 leading-relaxed">Enriched with polychromatic Meenakari silk threads capturing royal fauna.</p>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-outline-variant/20 flex flex-col gap-2">
+            <button onclick="handleTryThisVirtuallyClick('sb3')" class="w-full py-2.5 px-3 rounded-xl bg-primary-container text-amber-200 hover:bg-primary text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm transition-all group-hover:shadow-md">
+              <span class="material-symbols-outlined text-base text-amber-300 animate-pulse">auto_awesome</span>
+              <span>TRY THIS VIRTUALLY (AI FIT 3.0)</span>
+            </button>
+          </div>
+        </div>
+      </div><div data-product-card="true" class="group bg-surface-container-lowest rounded-2xl overflow-hidden border border-outline-variant/30 hover:border-primary/40 hover:shadow-lg transition-all flex flex-col" id="product-item-sb1">
+        <div class="relative aspect-[3/4] overflow-hidden bg-neutral-100">
+          <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Varanasi Royal Kadwa Brocade" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+            <span class="bg-black/60 backdrop-blur-md text-white text-[9px] uppercase tracking-wider font-bold px-2 py-0.5 rounded">Pure Katan Silk</span><span class="bg-black/60 backdrop-blur-md text-white text-[9px] uppercase tracking-wider font-bold px-2 py-0.5 rounded">Kadwa Technique</span>
+          </div>
+          <span class="absolute bottom-3 left-3 bg-primary-container text-amber-200 text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">
+            180 HRS WEAVE
+          </span>
+          <div class="absolute top-3 right-3 flex flex-col gap-1.5">
+            <button class="w-8 h-8 rounded-full bg-white/90 text-primary flex items-center justify-center hover:bg-white shadow">
+              <span class="material-symbols-outlined text-base">favorite</span>
+            </button>
+          </div>
+        </div>
+        <div class="p-4 flex-1 flex flex-col justify-between">
+          <div>
+            <div class="flex items-baseline justify-between gap-2">
+              <h3 class="font-headline text-base font-bold text-primary group-hover:text-primary-container leading-tight">Varanasi Royal Kadwa Brocade</h3>
+              <span class="font-bold text-sm text-primary flex-shrink-0">₹34,500</span>
+            </div>
+            <div class="flex items-center gap-1.5 mt-0.5">
+              <span class="text-[10px] text-amber-900 bg-amber-100/80 font-bold px-2 py-0.2 rounded">Saree (Drape + Blouse)</span>
+              <p class="text-[11px] text-secondary font-medium line-clamp-1">Heirloom Bridal Edition with Floral Pallu</p>
+            </div>
+            <p class="text-xs text-on-surface-variant mt-1.5 line-clamp-2 leading-relaxed">Handcrafted in Varanasi on traditional pit-looms with pure silver gilded zari.</p>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-outline-variant/20 flex flex-col gap-2">
+            <button onclick="handleTryThisVirtuallyClick('sb1')" class="w-full py-2.5 px-3 rounded-xl bg-primary-container text-amber-200 hover:bg-primary text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm transition-all group-hover:shadow-md">
+              <span class="material-symbols-outlined text-base text-amber-300 animate-pulse">auto_awesome</span>
+              <span>TRY THIS VIRTUALLY (AI FIT 3.0)</span>
+            </button>
+          </div>
+        </div>
+      </div><div data-product-card="true" class="group bg-surface-container-lowest rounded-2xl overflow-hidden border border-outline-variant/30 hover:border-primary/40 hover:shadow-lg transition-all flex flex-col" id="product-item-sb4">
+        <div class="relative aspect-[3/4] overflow-hidden bg-neutral-100">
+          <img src="https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Jangla Floral Jaal Silk Saree" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+            <span class="bg-black/60 backdrop-blur-md text-white text-[9px] uppercase tracking-wider font-bold px-2 py-0.5 rounded">Pure Katan Silk</span><span class="bg-black/60 backdrop-blur-md text-white text-[9px] uppercase tracking-wider font-bold px-2 py-0.5 rounded">Jangla Jaal</span>
+          </div>
+          <span class="absolute bottom-3 left-3 bg-primary-container text-amber-200 text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">
+            BRIDAL GRADE
+          </span>
+          <div class="absolute top-3 right-3 flex flex-col gap-1.5">
+            <button class="w-8 h-8 rounded-full bg-white/90 text-primary flex items-center justify-center hover:bg-white shadow">
+              <span class="material-symbols-outlined text-base">favorite</span>
+            </button>
+          </div>
+        </div>
+        <div class="p-4 flex-1 flex flex-col justify-between">
+          <div>
+            <div class="flex items-baseline justify-between gap-2">
+              <h3 class="font-headline text-base font-bold text-primary group-hover:text-primary-container leading-tight">Jangla Floral Jaal Silk Saree</h3>
+              <span class="font-bold text-sm text-primary flex-shrink-0">₹31,500</span>
+            </div>
+            <div class="flex items-center gap-1.5 mt-0.5">
+              <span class="text-[10px] text-amber-900 bg-amber-100/80 font-bold px-2 py-0.2 rounded">Saree (Drape + Blouse)</span>
+              <p class="text-[11px] text-secondary font-medium line-clamp-1">All-Over Gold &amp; Silver Gilded Vine Lattice</p>
+            </div>
+            <p class="text-xs text-on-surface-variant mt-1.5 line-clamp-2 leading-relaxed">Traditional Jangla design weaving intricate vines across rich pure Katan silk.</p>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-outline-variant/20 flex flex-col gap-2">
+            <button onclick="handleTryThisVirtuallyClick('sb4')" class="w-full py-2.5 px-3 rounded-xl bg-primary-container text-amber-200 hover:bg-primary text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm transition-all group-hover:shadow-md">
+              <span class="material-symbols-outlined text-base text-amber-300 animate-pulse">auto_awesome</span>
+              <span>TRY THIS VIRTUALLY (AI FIT 3.0)</span>
+            </button>
+          </div>
+        </div>
+      </div><div data-product-card="true" class="group bg-surface-container-lowest rounded-2xl overflow-hidden border border-outline-variant/30 hover:border-primary/40 hover:shadow-lg transition-all flex flex-col" id="product-item-sb2">
+        <div class="relative aspect-[3/4] overflow-hidden bg-neutral-100">
+          <img src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Swarnachari Golden Weave" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+            <span class="bg-black/60 backdrop-blur-md text-white text-[9px] uppercase tracking-wider font-bold px-2 py-0.5 rounded">Swarnachari Silk</span><span class="bg-black/60 backdrop-blur-md text-white text-[9px] uppercase tracking-wider font-bold px-2 py-0.5 rounded">Zari Pallu</span>
+          </div>
+          <span class="absolute bottom-3 left-3 bg-primary-container text-amber-200 text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">
+            LIMITED ARCHIVE
+          </span>
+          <div class="absolute top-3 right-3 flex flex-col gap-1.5">
+            <button class="w-8 h-8 rounded-full bg-white/90 text-primary flex items-center justify-center hover:bg-white shadow">
+              <span class="material-symbols-outlined text-base">favorite</span>
+            </button>
+          </div>
+        </div>
+        <div class="p-4 flex-1 flex flex-col justify-between">
+          <div>
+            <div class="flex items-baseline justify-between gap-2">
+              <h3 class="font-headline text-base font-bold text-primary group-hover:text-primary-container leading-tight">Swarnachari Golden Weave</h3>
+              <span class="font-bold text-sm text-primary flex-shrink-0">₹28,800</span>
+            </div>
+            <div class="flex items-center gap-1.5 mt-0.5">
+              <span class="text-[10px] text-amber-900 bg-amber-100/80 font-bold px-2 py-0.2 rounded">Saree (Drape + Blouse)</span>
+              <p class="text-[11px] text-secondary font-medium line-clamp-1">Mythological Miniature Narrative Borders</p>
+            </div>
+            <p class="text-xs text-on-surface-variant mt-1.5 line-clamp-2 leading-relaxed">Authentic handloom Swarnachari mulberry silk featuring intricate court scenes.</p>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-outline-variant/20 flex flex-col gap-2">
+            <button onclick="handleTryThisVirtuallyClick('sb2')" class="w-full py-2.5 px-3 rounded-xl bg-primary-container text-amber-200 hover:bg-primary text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm transition-all group-hover:shadow-md">
+              <span class="material-symbols-outlined text-base text-amber-300 animate-pulse">auto_awesome</span>
+              <span>TRY THIS VIRTUALLY (AI FIT 3.0)</span>
+            </button>
+          </div>
+        </div>
+      </div><div data-product-card="true" class="group bg-surface-container-lowest rounded-2xl overflow-hidden border border-outline-variant/30 hover:border-primary/40 hover:shadow-lg transition-all flex flex-col" id="product-item-sb5">
+        <div class="relative aspect-[3/4] overflow-hidden bg-neutral-100">
+          <img src="https://images.unsplash.com/photo-1610030469668-93510cb67655?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Katan Tanchoi Imperial Brocade" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+            <span class="bg-black/60 backdrop-blur-md text-white text-[9px] uppercase tracking-wider font-bold px-2 py-0.5 rounded">Katan Tanchoi</span><span class="bg-black/60 backdrop-blur-md text-white text-[9px] uppercase tracking-wider font-bold px-2 py-0.5 rounded">Satin Finish</span>
+          </div>
+          <span class="absolute bottom-3 left-3 bg-primary-container text-amber-200 text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">
+            LIGHTWEIGHT
+          </span>
+          <div class="absolute top-3 right-3 flex flex-col gap-1.5">
+            <button class="w-8 h-8 rounded-full bg-white/90 text-primary flex items-center justify-center hover:bg-white shadow">
+              <span class="material-symbols-outlined text-base">favorite</span>
+            </button>
+          </div>
+        </div>
+        <div class="p-4 flex-1 flex flex-col justify-between">
+          <div>
+            <div class="flex items-baseline justify-between gap-2">
+              <h3 class="font-headline text-base font-bold text-primary group-hover:text-primary-container leading-tight">Katan Tanchoi Imperial Brocade</h3>
+              <span class="font-bold text-sm text-primary flex-shrink-0">₹22,000</span>
+            </div>
+            <div class="flex items-center gap-1.5 mt-0.5">
+              <span class="text-[10px] text-amber-900 bg-amber-100/80 font-bold px-2 py-0.2 rounded">Saree (Drape + Blouse)</span>
+              <p class="text-[11px] text-secondary font-medium line-clamp-1">Satin-Finish Paisley Multi-Color Weave</p>
+            </div>
+            <p class="text-xs text-on-surface-variant mt-1.5 line-clamp-2 leading-relaxed">Woven with no floating threads on reverse, delivering feather-light regal comfort.</p>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-outline-variant/20 flex flex-col gap-2">
+            <button onclick="handleTryThisVirtuallyClick('sb5')" class="w-full py-2.5 px-3 rounded-xl bg-primary-container text-amber-200 hover:bg-primary text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm transition-all group-hover:shadow-md">
+              <span class="material-symbols-outlined text-base text-amber-300 animate-pulse">auto_awesome</span>
+              <span>TRY THIS VIRTUALLY (AI FIT 3.0)</span>
+            </button>
+          </div>
+        </div>
+      </div></section>
+<!-- Tailoring Concierge Box -->
+<section class="w-full mb-8 bg-surface-container-low rounded-2xl p-5 md:p-6 shadow-sm border border-outline-variant/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-2xl">crown</span>
+</div>
+<div>
+<h4 class="font-headline text-base md:text-lg text-primary font-bold">Atelier Master Tailoring</h4>
+<p class="text-xs text-on-surface-variant">Each piece can be customized with hand-embroidered zardozi trims and bespoke fall attachments.</p>
+</div>
+</div>
+<button class="px-4 py-2.5 rounded-xl bg-primary-container text-white text-xs uppercase tracking-wider font-bold hover:bg-primary transition-colors flex items-center gap-1.5 shadow-sm whitespace-nowrap" onclick="alert('Atelier Stylist WhatsApp concierge scheduled within 15 minutes!')">
+<span>Book Stylist Call</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</button>
+</section>
+</div>
+</div>
+</main>
+<!-- MOBILE BOTTOM NAV -->
+<nav class="md:hidden fixed bottom-0 inset-x-0 z-40 pb-safe bg-surface/90 backdrop-blur-2xl shadow-[0_-4px_24px_rgba(88,17,26,0.08)] border-t border-outline-variant/30">
+<div class="flex justify-around items-center h-16 px-4 max-w-md mx-auto">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary" href="#" onclick="resetToHome()">
+<span class="material-symbols-outlined text-xl">storefront</span>
+<span class="text-[10px] mt-0.5 uppercase">Boutique</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary font-bold" href="#">
+<span class="material-symbols-outlined text-xl">grid_view</span>
+<span class="text-[10px] mt-0.5 uppercase">Categories</span>
+</a>
+<a class="flex flex-col items-center justify-center -mt-3 px-3 py-1 rounded-full bg-primary-container text-white shadow-lg" href="javascript:void(0)" onclick="openTryOnForFirstItem()">
+<span class="material-symbols-outlined text-xl text-amber-200 animate-pulse">auto_awesome</span>
+<span class="text-[8px] uppercase tracking-widest font-bold">AI Try-On</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary" href="javascript:void(0)" onclick="openOwnerPortraitLightbox()">
+<span class="material-symbols-outlined text-xl">shield_person</span>
+<span class="text-[10px] mt-0.5 uppercase">Atelier</span>
+</a>
+</div>
+</nav>
+<!-- ATELIER OWNER PORTRAIT ZOOM LIGHTBOX MODAL -->
+<div class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md items-center justify-center p-3 sm:p-6 transition-all duration-300 hidden opacity-0" id="owner-portrait-modal" onclick="handleOwnerModalBackdrop(event)">
+<div class="relative bg-surface rounded-2xl max-w-lg w-full shadow-2xl border-2 border-secondary-container/80 overflow-hidden transform transition-all duration-300 my-auto scale-95" id="owner-portrait-content" onclick="event.stopPropagation()">
+<!-- Top bar with title and close button -->
+<div class="px-5 py-3.5 bg-gradient-to-r from-primary-container via-primary to-primary-container text-white flex items-center justify-between border-b border-amber-300/30">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-amber-400/20 border border-amber-300/50 flex items-center justify-center text-amber-200">
+<span class="material-symbols-outlined text-lg">crown</span>
+</div>
+<div>
+<h4 class="font-headline text-sm sm:text-base font-bold text-amber-100 tracking-wide">Aashirya S.</h4>
+<p class="text-[10px] uppercase tracking-widest text-amber-300/90 font-semibold">Founder &amp; Master Couturier</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full bg-black/40 hover:bg-black/70 text-amber-200 hover:text-white flex items-center justify-center transition-colors border border-amber-300/30 text-lg leading-none" onclick="closeOwnerPortraitLightbox()" title="Close portrait (Esc)">
+      ✕
+    </button>
+</div>
+<!-- High-resolution Portrait Container with regal borders -->
+<div class="relative p-3.5 sm:p-5 bg-gradient-to-b from-[#240509] to-[#120003] flex flex-col items-center">
+<div class="relative w-full aspect-square max-w-[420px] rounded-xl overflow-hidden shadow-2xl border-2 border-amber-300/60 ring-4 ring-amber-500/20 group">
+<img alt="Aashirya S. — Master Couturier &amp; Creative Director" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" id="owner-modal-highres-img" src="https://lh3.googleusercontent.com/aida/ALJJyrBjSVwN4BFU0FUFQgFTZFpj1-7SiOX_1n7pM9MhT0hdXhAW8Ms6zLffYyl-vPeuCYEreJm2k0dR220PJb8adwgnGWfFrAF-HZG5gpn28oPGZA2zov2U1ow7DzoaiW_dZ8MglOC1lvssQqDlnEeC__mLVEJOYpxx5E7y7df_1lFae3edXd7bBhHR06ENchW6-FcDsxOigRCjrColRmeTMOsmCwQZ_HaSAUBXECAmfq54">
+<div class="absolute top-3 left-3 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-full border border-amber-300/40 text-[10px] text-amber-200 font-bold uppercase tracking-wider flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+<span>Atelier Haute Couture Studio</span>
+</div>
+<div class="absolute bottom-3 inset-x-3 bg-black/75 backdrop-blur-md text-amber-100 p-2.5 rounded-lg border border-amber-300/30 text-center">
+<p class="font-headline text-xs font-semibold text-amber-200">Bespoke Royal Craftsmanship &amp; Neural Draping</p>
+<p class="text-[10px] text-white/80 mt-0.5">Heritage Handloom Preservation • Varanasi &amp; Awadh Archives</p>
+</div>
+</div>
+<!-- Footer CTA inside modal -->
+<div class="mt-4 w-full flex items-center justify-between gap-3 text-xs">
+<div class="text-left text-amber-200/90 text-[11px]">
+<span class="font-semibold block text-amber-100">Direct Consultation Available</span>
+<span class="text-[10px] text-white/60">Bespoke Bridal &amp; Festive Appointments</span>
+</div>
+<a class="inline-flex items-center gap-2 bg-[#58111A] hover:bg-primary text-white px-4 py-2 rounded-full shadow-md hover:shadow-lg transition-all duration-300 border border-amber-300/40 group flex-shrink-0 text-xs font-bold font-headline tracking-wider uppercase" href="tel:8109684478" title="Call Atelier: 8109684478"><span class="material-symbols-outlined text-[17px] text-amber-200 group-hover:scale-110 transition-transform duration-300">call</span><span>CONTACT ATELIER (8109684478)</span></a></div>
+</div>
+</div>
+</div>
+<!-- VIRTUAL TRY-ON (AI FIT 3.0) DYNAMIC MULTI-CATEGORY MODAL -->
+<div class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-2 sm:p-4 overflow-y-auto" id="ai-modal" onclick="handleBackdropClick(event)">
+<div class="bg-surface rounded-2xl max-w-5xl w-full my-auto shadow-2xl border border-secondary-container/50 text-left relative flex flex-col max-h-[94vh] overflow-hidden" onclick="event.stopPropagation()">
+<!-- Modal Header -->
+<div class="px-5 py-3.5 bg-surface-container-low border-b border-outline-variant/30 flex items-center justify-between flex-shrink-0">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container text-amber-200 flex items-center justify-center shadow-md flex-shrink-0">
+<span class="material-symbols-outlined text-xl">auto_awesome</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-headline text-lg sm:text-xl text-primary font-bold leading-tight">Virtual Try-On Studio</h3>
+<span class="text-[10px] uppercase tracking-widest font-bold text-on-secondary-container bg-secondary-container px-2 py-0.5 rounded-full">AI Fit 3.0 Dynamic Engine</span>
+</div>
+<p class="text-[11px] text-on-surface-variant" id="modal-header-desc">Dynamic Garment Fitting with Strict Facial &amp; Physique Identity Preservation</p>
+</div>
+</div>
+<button class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors" onclick="closeAITryOnModal()" title="Close Modal">
+<span class="material-symbols-outlined text-xl">close</span>
+</button>
+</div>
+<!-- Active Garment Sticky Ribbon -->
+<div class="bg-primary/95 text-white px-5 py-2.5 flex items-center justify-between text-xs flex-wrap gap-2 flex-shrink-0">
+<div class="flex items-center gap-2.5 min-w-0">
+<img alt="Selected Product" class="w-10 h-10 rounded-lg object-cover border border-amber-300/40 shadow-xs flex-shrink-0" id="selected-garment-thumb" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpE79oXZqMXIf0NUB0pcVoXobTtA3n_tBwvotUPCM5yjpP8aIT-1yfyua4zamokEE3BZUmxXDRQYBqswrBLiPzJhrThZ3KbQJoNuK0JkQzMkVHjkGzrls1WazyURygC5m6lqfnZEkmCFQTWwhT1t487DPW9LVQK3udlLpACIDK1UnK6z92OcU26J8X18OA-RUbsEs9gcScGaetxdPQzqNFAG_HrRV7rRSuFvfcNlQ">
+<div class="truncate">
+<div class="flex items-center gap-1.5 flex-wrap">
+<span class="text-[10px] text-amber-200 uppercase tracking-wider font-semibold" id="selected-garment-cat">Women's Sarees</span>
+<span class="text-[9px] bg-amber-400/20 border border-amber-300/40 text-amber-200 px-1.5 py-0.2 rounded font-bold" id="selected-garment-zone-badge">Target: Full Outfit</span>
+</div>
+<span class="font-headline font-bold text-white text-sm truncate block" id="selected-garment-title">Varanasi Royal Kadwa Brocade</span>
+</div>
+</div>
+<div class="flex items-center gap-3 ml-auto">
+<span class="text-amber-300 font-bold text-sm" id="selected-garment-price">₹34,500</span>
+<button class="text-[11px] text-amber-200 hover:text-white underline font-medium" onclick="closeModalAndScrollToCatalog()">Switch Product</button>
+</div>
+</div>
+<!-- Stepper Navigation -->
+<div class="px-5 py-2.5 bg-surface border-b border-outline-variant/20 flex-shrink-0">
+<div class="flex items-center justify-between max-w-2xl mx-auto text-xs font-semibold text-on-surface-variant">
+<div class="flex items-center gap-1.5 text-primary font-bold" id="step-nav-1">
+<span class="w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">1</span>
+<span class="hidden sm:inline">Upload / Photo</span>
+</div>
+<div class="flex-1 h-[2px] bg-outline-variant/30 mx-2" id="line-1"></div>
+<div class="flex items-center gap-1.5 opacity-40" id="step-nav-2">
+<span class="w-6 h-6 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center text-xs font-bold">2</span>
+<span class="hidden sm:inline">Garment Mapping &amp; Verify</span>
+</div>
+<div class="flex-1 h-[2px] bg-outline-variant/30 mx-2" id="line-2"></div>
+<div class="flex items-center gap-1.5 opacity-40" id="step-nav-3">
+<span class="w-6 h-6 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center text-xs font-bold">3</span>
+<span class="hidden sm:inline">AI Synthesis</span>
+</div>
+<div class="flex-1 h-[2px] bg-outline-variant/30 mx-2" id="line-3"></div>
+<div class="flex items-center gap-1.5 opacity-40" id="step-nav-4">
+<span class="w-6 h-6 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center text-xs font-bold">4</span>
+<span class="hidden sm:inline">Results &amp; Download</span>
+</div>
+</div>
+</div>
+<!-- Scrollable Modal Body -->
+<div class="p-4 sm:p-6 overflow-y-auto flex-1 bg-surface">
+<!-- STEP 1 -->
+<div class="space-y-6" id="tryon-step-1">
+<div class="max-w-2xl mx-auto bg-surface-container-low rounded-2xl p-3.5 border border-outline-variant/30 flex items-center justify-between gap-3 shadow-xs">
+<div class="flex items-center gap-3 min-w-0">
+<img alt="Active Piece" class="w-12 h-14 rounded-lg object-cover border border-outline-variant flex-shrink-0" id="spec-card-thumb" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzcUTKXWeawTEmtIg1f_jrKh9JYkoCiQMsseAQ-1BjVPsuvOlwnMO5ksgio0Hd4OBOokOd5lmljNtQ8yvT5Ha51bwBoZhuVoWXwrRKWmCjs958hPjCEG2BerYhBoeDk0x4r2JacLDzhbLXTpRDEgUOwvmA7AX0H1vybBuv9GbCqD5t7WBjFu80KLQ7Eqsuic6335LLGt97oFhOoFez-jzNe66KpcTQntDn0VJu-CM">
+<div class="min-w-0">
+<span class="text-[10px] uppercase font-bold text-secondary tracking-widest block" id="spec-card-department">Department: Sarees</span>
+<h5 class="font-headline text-sm font-bold text-primary truncate" id="spec-card-title">Varanasi Royal Kadwa Brocade</h5>
+<p class="text-[11px] text-on-surface-variant mt-0.5 line-clamp-1" id="spec-card-type-desc">Category Type: Saree (Drape + Blouse) • Target Zone: Full Body</p>
+</div>
+</div>
+<div class="text-right flex-shrink-0">
+<span class="text-xs font-bold text-primary block" id="spec-card-price">₹34,500</span>
+<span class="text-[9px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full inline-block mt-0.5">Strict AI Boundary</span>
+</div>
+</div>
+<div class="text-center max-w-lg mx-auto">
+<h4 class="font-headline text-xl text-primary font-bold">Provide Customer Photograph</h4>
+<p class="text-xs text-on-surface-variant mt-1">Select an existing portrait from your phone or computer, or use your device camera to capture a new photo.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
+<div class="border-2 border-dashed border-outline-variant hover:border-primary rounded-2xl p-6 text-center bg-surface-container-lowest transition-all cursor-pointer group flex flex-col items-center justify-center" onclick="triggerFileInput()" ondragover="event.preventDefault(); this.classList.add('border-primary', 'bg-amber-50/50');">
+<input accept="image/*" class="hidden" id="tryon-file-input" onchange="handleFileSelect(event)" type="file">
+<div class="w-14 h-14 rounded-full bg-amber-50 group-hover:bg-amber-100 text-secondary flex items-center justify-center mb-3 transition-colors">
+<span class="material-symbols-outlined text-3xl">photo_library</span>
+</div>
+<h5 class="font-headline text-base font-bold text-primary">Upload from Gallery</h5>
+<p class="text-xs text-on-surface-variant mt-1">Select photo from phone or computer</p>
+<span class="mt-4 px-3.5 py-1.5 rounded-full bg-surface-container-high text-primary text-xs font-bold group-hover:bg-primary group-hover:text-white transition-colors">Browse Files</span>
+</div>
+<div class="border-2 border-dashed border-outline-variant hover:border-primary rounded-2xl p-6 text-center bg-surface-container-lowest transition-all cursor-pointer group flex flex-col items-center justify-center" onclick="startCameraCapture()" ondragover="event.preventDefault(); this.classList.add('border-primary', 'bg-amber-50/50');">
+<div class="w-14 h-14 rounded-full bg-primary/10 group-hover:bg-primary/20 text-primary flex items-center justify-center mb-3 transition-colors">
+<span class="material-symbols-outlined text-3xl">photo_camera</span>
+</div>
+<h5 class="font-headline text-base font-bold text-primary">Take Photo with Camera</h5>
+<p class="text-xs text-on-surface-variant mt-1">Open device camera to capture new photo</p>
+<span class="mt-4 px-3.5 py-1.5 rounded-full bg-surface-container-high text-primary text-xs font-bold group-hover:bg-primary group-hover:text-white transition-colors">Open Camera</span>
+</div>
+</div>
+<div class="hidden max-w-md mx-auto bg-black rounded-2xl overflow-hidden shadow-xl border border-secondary-container/40 p-3" id="camera-viewfinder-box">
+<div class="relative aspect-[3/4] w-full bg-neutral-900 rounded-xl overflow-hidden flex items-center justify-center">
+<video autoplay="" class="w-full h-full object-cover" id="camera-video" playsinline=""></video>
+<canvas class="hidden" id="camera-canvas"></canvas>
+<div class="absolute inset-4 border border-white/30 rounded-xl pointer-events-none flex flex-col justify-between p-3">
+<div class="flex justify-between items-center text-[10px] text-white/80 bg-black/50 px-2 py-1 rounded">
+<span>Align Face &amp; Shoulders in Frame</span>
+<span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+</div>
+<div class="text-center text-[11px] text-white/80 bg-black/40 py-1 rounded">Stand approx. 4–6 feet away for full drape view</div>
+</div>
+</div>
+<div class="mt-3 flex items-center justify-between gap-3 px-2">
+<button class="text-xs text-white/80 hover:text-white px-3 py-2 rounded-lg bg-neutral-800" onclick="stopCameraStream()">Cancel</button>
+<button class="px-5 py-2.5 rounded-full bg-primary-container text-white text-xs font-bold flex items-center gap-2 hover:bg-primary shadow-lg border border-amber-300/40" onclick="captureCameraPhoto()">
+<span class="material-symbols-outlined text-base">camera</span>
+<span>Capture Photo</span>
+</button>
+</div>
+</div>
+</div>
+<!-- STEP 2 -->
+<div class="hidden space-y-6" id="tryon-step-2">
+<div class="text-center max-w-lg mx-auto">
+<h4 class="font-headline text-xl text-primary font-bold">Photo Verification &amp; AI Boundary Mapping</h4>
+<p class="text-xs text-on-surface-variant mt-1" id="step2-subtitle">Review your portrait. AI Fit 3.0 strictly replaces only the chosen garment segment while preserving your facial identity and body proportions.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto items-center">
+<div class="relative aspect-[3/4] w-full max-w-xs mx-auto rounded-2xl overflow-hidden border-2 border-primary/20 shadow-md bg-neutral-900">
+<img alt="Selected Customer Photo" class="w-full h-full object-cover object-center" id="preview-user-photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApJvQGruo67CErkTGR-kKzwoUkrjsZD0_4gU_s6R8_xb4xsPu5S8LLVrbyNr_mZhZEScM5yKuKzji1T6iIGz7k5W5Lpp1gq9xS_utuVo_mS9I3VH8NNhH6VP5TNfHZW3nO0ku-ZZN6jfktcsZR7Nct9OcOdRyMYWI2-ZJ3HvkEjQZPXTpVtbo2m6S_Ko52Jhg5lX0sz0XuiNaG_FOtNKLlRhVHaqB8ZHjbHa0lQnA">
+<div class="absolute top-4 inset-x-12 h-28 border-2 border-emerald-400 bg-emerald-500/10 rounded-full pointer-events-none flex items-center justify-center">
+<span class="text-[9px] font-bold uppercase tracking-wider bg-emerald-700 text-white px-2 py-0.5 rounded-full shadow">Face &amp; Hair Locked (100%)</span>
+</div>
+<div class="absolute border-2 border-amber-400/80 bg-amber-400/10 rounded-xl pointer-events-none flex items-start justify-center pt-2 transition-all inset-x-3 bottom-3 top-2/5" id="preview-replacement-zone-overlay">
+<span class="text-[9px] font-bold uppercase tracking-wider bg-amber-600 text-white px-2 py-0.5 rounded shadow" id="preview-replacement-zone-text">Only Clothing Replaced</span>
+</div>
+</div>
+<div class="space-y-4">
+<div class="bg-amber-50/70 border border-amber-200/80 rounded-2xl p-4">
+<div class="flex items-center gap-2 text-primary font-bold font-headline text-base mb-2">
+<span class="material-symbols-outlined text-secondary text-xl">verified_user</span>
+<span id="step2-rule-headline">Category Replacement Guarantee</span>
+</div>
+<ul class="text-xs text-on-surface space-y-2">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-emerald-600 text-base flex-shrink-0 mt-0.5">check_circle</span>
+<span><strong>Face &amp; Hairstyle:</strong> Original face shape, eyes, nose, lips, facial expression, skin tone, and hair remain 100% untouched.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-emerald-600 text-base flex-shrink-0 mt-0.5">check_circle</span>
+<span id="step2-physique-note"><strong>Natural Physique:</strong> Body shape, height appearance, curves, and natural posture are preserved. No morphing or altering.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-emerald-600 text-base flex-shrink-0 mt-0.5">check_circle</span>
+<span id="step2-replacement-policy"><strong>Target Replacement:</strong> Only apparel in the specified zone is replaced with the selected royal product.</span>
+</li>
+</ul>
+</div>
+<div class="flex flex-col sm:flex-row gap-3 pt-2">
+<button class="flex-1 py-3 px-4 rounded-xl border border-outline-variant/60 text-xs font-semibold text-on-surface hover:bg-surface-container transition-colors text-center flex items-center justify-center gap-1.5" onclick="goToStep(1)">
+<span class="material-symbols-outlined text-base">replay</span>
+<span>Retake Photo</span>
+</button>
+<button class="flex-1 py-3 px-4 rounded-xl bg-primary text-white text-xs font-bold uppercase tracking-wider hover:bg-primary-container shadow-md transition-colors text-center flex items-center justify-center gap-1.5" onclick="quickStartNeuralSynthesis()">
+<span>Continue</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- STEP 3 -->
+<div class="hidden space-y-6 py-4" id="tryon-step-3">
+<div class="text-center max-w-lg mx-auto">
+<div class="w-16 h-16 mx-auto mb-3 rounded-full bg-primary-container text-amber-200 flex items-center justify-center shadow-lg relative">
+<span class="material-symbols-outlined text-3xl animate-spin">cyclone</span>
+<span class="absolute -top-1 -right-1 flex h-4 w-4">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-4 w-4 bg-emerald-600"></span>
+</span>
+</div>
+<h4 class="font-headline text-2xl text-primary font-bold" id="synthesis-heading">Garment-Only Neural Inpainting Active</h4>
+<p class="text-xs text-on-surface-variant mt-1" id="synthesis-garment-name">Synthesizing selected creation while locking 100% of identity, pose, background &amp; lighting...</p>
+</div>
+<div class="max-w-2xl mx-auto bg-surface-container-low rounded-2xl p-5 border border-outline-variant/30 space-y-4">
+<div class="flex justify-between items-center text-xs">
+<span class="font-bold text-primary flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span>
+<span id="synthesis-status-text">Executing Stage 1: Room &amp; Ambiance Retention...</span>
+</span>
+<span class="font-bold text-secondary text-sm font-mono" id="synthesis-percentage">15%</span>
+</div>
+<div class="w-full h-2.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary to-amber-600 rounded-full transition-all duration-300" id="synthesis-progress-bar" style="width: 15%"></div>
+</div>
+<div class="flex items-center justify-between pt-1 gap-2">
+<span class="text-[11px] text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-amber-600">bolt</span>
+<span>AI Fit 3.0 Realtime Neural Engine Active</span>
+</span>
+<button class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container hover:bg-amber-300 text-[11px] font-bold flex items-center gap-1 shadow-xs transition-colors cursor-pointer" onclick="if(synthesisInterval) clearInterval(synthesisInterval); showStep4Results();" type="button">
+<span class="material-symbols-outlined text-[14px]">fast_forward</span>
+<span>⚡ Turbo Mode: Skip to Result</span>
+</button>
+</div>
+<div class="space-y-2.5 pt-2 border-t border-outline-variant/20 text-xs">
+<div class="flex items-start gap-2.5 p-2 rounded-lg bg-surface-container transition-all" id="log-step-1">
+<span class="material-symbols-outlined text-emerald-600 text-base mt-0.5" id="log-icon-1">check_circle</span>
+<div>
+<p class="font-bold text-on-surface">Stage 1: Background &amp; Lighting Lock</p>
+<p class="text-[11px] text-on-surface-variant" id="log-desc-1">Zero distortion to room, mirror, background, ambiance &amp; shadow vectors.</p>
+</div>
+</div>
+<div class="flex items-start gap-2.5 p-2 rounded-lg bg-surface-container/60 transition-all" id="log-step-2">
+<span class="material-symbols-outlined text-secondary text-base mt-0.5 animate-spin" id="log-icon-2">sync</span>
+<div>
+<p class="font-bold text-on-surface">Stage 2: Pose &amp; Silhouette Landmark Rigging</p>
+<p class="text-[11px] text-on-surface-variant" id="log-desc-2">Exact body posture, arm angle, hand &amp; phone positioning locked in 3D coordinate space.</p>
+</div>
+</div>
+<div class="flex items-start gap-2.5 p-2 rounded-lg bg-surface-container/30 transition-all opacity-60" id="log-step-3">
+<span class="material-symbols-outlined text-outline text-base mt-0.5" id="log-icon-3">hourglass_empty</span>
+<div>
+<p class="font-bold text-on-surface">Stage 3: Garment Boundary Segmentation</p>
+<p class="text-[11px] text-on-surface-variant" id="log-desc-3">Isolating only target clothing area (upper/lower/drape) without bleeding into surroundings.</p>
+</div>
+</div>
+<div class="flex items-start gap-2.5 p-2 rounded-lg bg-surface-container/30 transition-all opacity-60" id="log-step-4">
+<span class="material-symbols-outlined text-outline text-base mt-0.5" id="log-icon-4">hourglass_empty</span>
+<div>
+<p class="font-bold text-on-surface">Stage 4: Realistic Fabric Draping &amp; Texture Mapping</p>
+<p class="text-[11px] text-on-surface-variant" id="log-desc-4">Synthesizing natural micro-folds, tension lines &amp; woven zardozi luster conforming to pose.</p>
+</div>
+</div>
+<div class="flex items-start gap-2.5 p-2 rounded-lg bg-surface-container/30 transition-all opacity-60" id="log-step-5">
+<span class="material-symbols-outlined text-outline text-base mt-0.5" id="log-icon-5">hourglass_empty</span>
+<div>
+<p class="font-bold text-on-surface">Stage 5: Identity &amp; Skin Tone Photorealistic Blending</p>
+<p class="text-[11px] text-on-surface-variant" id="log-desc-5">Original face, skin pigmentation, neckline, hair strand edges &amp; hands preserved with 0% alteration.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- STEP 4 -->
+<div class="hidden space-y-6" id="tryon-step-4">
+<div class="space-y-4">
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-outline-variant/20 pb-3">
+<div>
+<div class="flex items-center gap-2 flex-wrap">
+<span class="text-[10px] text-emerald-800 bg-emerald-100 font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider inline-flex items-center gap-1 shadow-xs">
+<span class="material-symbols-outlined text-[13px]">check_circle</span> Virtual Try-On Rendered
+</span>
+<span class="text-[10px] text-amber-900 bg-amber-100 font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider" id="result-category-badge">Category: Women's Sarees</span>
+<span class="text-[10px] text-primary font-bold bg-amber-400/20 px-2.5 py-0.5 rounded-full uppercase tracking-wider border border-amber-300/40">Zero Pose &amp; Background Shift</span>
+</div>
+<h4 class="font-headline text-xl text-primary font-bold mt-1" id="result-garment-title">Varanasi Royal Kadwa Brocade</h4>
+</div>
+<div class="flex items-center gap-1.5 p-1 bg-surface-container rounded-xl overflow-x-auto">
+<button class="px-3 py-1.5 rounded-lg text-xs font-bold bg-primary text-white shadow-xs transition-all" id="view-mode-split" onclick="setResultComparisonMode('split')">
+<span class="inline-flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">view_column</span> Side-by-Side</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg text-xs font-medium text-on-surface hover:text-primary transition-all" id="view-mode-toggle" onclick="setResultComparisonMode('toggle')">
+<span class="inline-flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">compare</span> Before/After Toggle</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+<div class="p-2 rounded-xl bg-surface-container-low border border-outline-variant/30 flex items-center gap-2 text-xs">
+<span class="material-symbols-outlined text-emerald-600 text-lg flex-shrink-0">face</span>
+<span class="text-[11px] font-semibold text-on-surface leading-tight">Face, Identity &amp; Hairstyle 100% Preserved</span>
+</div>
+<div class="p-2 rounded-xl bg-surface-container-low border border-outline-variant/30 flex items-center gap-2 text-xs">
+<span class="material-symbols-outlined text-emerald-600 text-lg flex-shrink-0">wallpaper</span>
+<span class="text-[11px] font-semibold text-on-surface leading-tight">Original Background, Lighting &amp; Surroundings Retained</span>
+</div>
+<div class="p-2 rounded-xl bg-surface-container-low border border-outline-variant/30 flex items-center gap-2 text-xs">
+<span class="material-symbols-outlined text-emerald-600 text-lg flex-shrink-0">accessibility_new</span>
+<span class="text-[11px] font-semibold text-on-surface leading-tight">Exact Body Pose &amp; Proportions Preserved</span>
+</div>
+<div class="p-2 rounded-xl bg-surface-container-low border border-outline-variant/30 flex items-center gap-2 text-xs">
+<span class="material-symbols-outlined text-secondary text-lg flex-shrink-0">texture</span>
+<span class="text-[11px] font-semibold text-on-surface leading-tight">Garment-Only Neural Inpainting &amp; Fabric Texture Mapping</span>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<div class="lg:col-span-8 space-y-3">
+<div class="bg-neutral-950 rounded-2xl overflow-hidden p-3 md:p-4 shadow-xl border border-secondary-container/40" id="comparison-container-split"><div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-neutral-950 p-2 sm:p-3 rounded-2xl border border-secondary-container/40"><div class="relative rounded-xl overflow-hidden bg-neutral-900 border border-white/20 aspect-[3/4] flex items-center justify-center group shadow-md"><img id="originalPhotoCompare" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAueCR1fN1PBrKZSRfbwYzz4cUd97vp31pFdQ5AaE-reFnlgw2QRab8KcXePZdaZH_Dia_XF4C4RIzD12SGmxsfxT6T6rOsKCIeMJe8nJIbq6rtr0N-fR7h2Z326VT8c9zB6s5UxN9nsNLm9lhQfz_Y3x-z1F4sWyqyKP3iQiDPa85yEvrvZnBgexXesZUEGhZ411zO5eC5pE96IF-7fbJs-pyE-uJtYCxBYulqiIk" alt="Original Photo" class="w-full h-full object-cover object-center"><div class="absolute top-3 left-3 bg-black/85 text-white text-[11px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow border border-white/20 flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-neutral-400"></span><span>ORIGINAL PHOTO</span></div><div class="absolute bottom-3 inset-x-3 bg-black/85 backdrop-blur-md text-white text-[11px] font-medium p-2.5 rounded-lg border border-white/10 text-center tracking-wide">Base Pose, Hair, Background &amp; Lighting Reference</div></div><div class="relative rounded-xl overflow-hidden bg-neutral-900 border-2 border-emerald-500 aspect-[3/4] flex items-center justify-center group shadow-lg"><img id="result-draped-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6uOntCT7sVezQRXyh0G-3eTYqiuAAXJ1TGkvMBE6eSQNFeoXPsPUnZCXtvxl725dM_w-P_EVqNJdTZlBzRAd4iPve5SHv8b9IS8T8Eztu0CnFL5r-3LNGTDFVEsg48oY-Subif7ImcyOzqYq0ASQWeg6IPpKoyCZsO84ezieA9dveV4dTwN9LpI9lHBzjfirMdHa1tDwhjdRSNFTKwt62Gz6L9vhJ96FXr4curMk" alt="AI Try-On Result" class="w-full h-full object-cover object-center transition-all duration-300"><div class="absolute top-3 left-3 bg-black/85 backdrop-blur-md text-amber-200 text-[11px] font-bold px-3 py-1.5 rounded-full border border-amber-300/40 flex items-center gap-1.5 uppercase tracking-wider"><span class="material-symbols-outlined text-[15px]">videocam</span><span id="active-angle-badge">FRONT VIEW</span></div><div class="absolute top-3 right-3 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-md border border-emerald-400 flex items-center gap-1.5"><span class="material-symbols-outlined text-[15px]">check_circle</span><span>AI TRY-ON RESULT</span></div><div class="absolute bottom-3 inset-x-3 bg-black/90 backdrop-blur-md text-white text-[11px] p-2.5 rounded-xl border border-emerald-500/40 flex items-center justify-between shadow-lg"><div class="flex items-center gap-1.5 text-emerald-400 font-bold whitespace-nowrap"><span class="material-symbols-outlined text-[16px]">verified</span><span>Clothing Replaced Only</span></div><span class="text-white/90 text-[10.5px] truncate ml-2 font-medium" id="angle-descriptor">Same Model • Same Room • Precise Garment Draping</span></div></div></div></div>
+<div class="hidden bg-neutral-950 rounded-2xl overflow-hidden p-4 shadow-xl border border-secondary-container/40" id="comparison-container-toggle">
+<div class="relative rounded-xl overflow-hidden aspect-[3/4] max-w-md mx-auto bg-neutral-900">
+<img alt="Try-On Preview" class="w-full h-full object-cover object-center transition-all duration-300" id="interactive-toggle-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDy_SFQNHiNZz-P1pGGDt0mbyIlmHlQ7fV7rI2a4dSXOtB2GB7jUKagpyR0TpHZQIb8Bn_SkQxgKbckuBQ7C7dcbxCTg1RIrSVuzH0tXYZMCyXnD0AdELuOeh_-Zm5_htGPc0KlRd7kCzO1RfySqmCphAF3Ey3Wm23pV4XSjVBNMm_mUhnsUzO9QMSekLgZoj3x7bL2V1-nxFuG5RRizA7YjcrN_Bl2QbQ4tL8iLVk">
+<div class="absolute top-3 left-3 bg-black/85 text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-white/20 flex items-center gap-1.5" id="interactive-toggle-badge">
+<span class="material-symbols-outlined text-[14px] text-emerald-400">check_circle</span>
+<span id="interactive-toggle-badgetext">AI Try-On Result</span>
+</div>
+<div class="absolute bottom-4 inset-x-4 flex justify-center">
+<button class="px-5 py-2 rounded-full bg-white text-primary text-xs font-bold uppercase tracking-wider shadow-2xl hover:bg-amber-100 flex items-center gap-2" onclick="toggleSingleView()">
+<span class="material-symbols-outlined text-base">swap_horiz</span>
+<span id="toggle-button-label">Press to View Original</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-4 space-y-4">
+<div class="bg-surface-container-lowest rounded-2xl p-4 border border-outline-variant/30 space-y-3">
+<div class="flex items-baseline justify-between">
+<h5 class="font-headline text-base font-bold text-primary">4 Render Perspectives</h5>
+<span class="text-[11px] text-secondary font-semibold">Same Base Photograph</span>
+</div>
+<div class="grid grid-cols-4 gap-2 pt-1">
+<div class="cursor-pointer border-2 rounded-xl overflow-hidden transition-all border-primary shadow-sm" id="thumb-angle-front" onclick="switchResultAngle('front')">
+<div class="w-full h-16 overflow-hidden bg-neutral-900">
+<img alt="Front" class="w-full h-full object-cover" id="thumb-img-front" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqTYbe-z1CikQexUKkJxUH8BrqqpWU_Au9Wd_FujQ_z8P6xetky7ckIR0jAb_0m6jpqFmUP3h2513--1JnS62Lskjk4SPxyf8lkCQUkkpmSMRCyscKbasdsuTKTJ5KOBOElHMdbHHVWjc7bo6J-6oasQH-aYXBikEcdfyGliWuNtXlabJ7wAS_CqwU_aYhSA5TxPVjY_bpXtaP9Q8BXaLUWctFq01fDbOr6PE3l58">
+</div>
+<span class="block text-[9px] text-center font-bold py-1 bg-surface-container text-primary truncate px-0.5" id="thumb-label-front">Front</span>
+</div>
+<div class="cursor-pointer border-2 rounded-xl overflow-hidden transition-all border-transparent hover:border-outline" id="thumb-angle-back" onclick="switchResultAngle('back')">
+<div class="w-full h-16 overflow-hidden bg-neutral-900">
+<img alt="Back" class="w-full h-full object-cover" id="thumb-img-back" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8szNREmbEajBxQjm05o5Z1BVSHY9gXhrVMMZnaUHqVpoB4BZG_8B-Va9Lfe41RqDNmwyiN0A36RgR8HnngU6O71aq6aJedh1l_EiZtnekR-RlXgMQhZHms6IAIdtHjO9tHVZQg8pAp3_mNINy6SzzO8IrpqG-rHOoPwH4eV_O3RjwGF4iRBplqF-3S82ugkUdNZeUZG19Ugib1JUFOksQw6ZepTdOYIFcOnGk1uQ">
+</div>
+<span class="block text-[9px] text-center font-bold py-1 bg-surface-container text-on-surface truncate px-0.5" id="thumb-label-back">Back</span>
+</div>
+<div class="cursor-pointer border-2 rounded-xl overflow-hidden transition-all border-transparent hover:border-outline" id="thumb-angle-side" onclick="switchResultAngle('side')">
+<div class="w-full h-16 overflow-hidden bg-neutral-900">
+<img alt="Side" class="w-full h-full object-cover" id="thumb-img-side" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAV9d-0WS7rdqS25lhJO1liKeqqXXErvChs8wDW9xuqYpJSyUCdy6RwC9d2EXHOUbr0-qAcLFr8silh-9DGJZ9F-gtrUySdawbAe1Klbexto8WMLVCwME3kdckEolJcUz5ec5BqMmgCTicXLEPiabjW81UXbwnRa5hn-tOxwV0EoyYeXcQkk10NR4JS27Q7zzr4c095rE2zRIU-kHVwOlwmHTY8sEKXgiNnqRw0ZvQ">
+</div>
+<span class="block text-[9px] text-center font-bold py-1 bg-surface-container text-on-surface truncate px-0.5" id="thumb-label-side">Side</span>
+</div>
+<div class="cursor-pointer border-2 rounded-xl overflow-hidden transition-all border-transparent hover:border-outline" id="thumb-angle-three_quarter" onclick="switchResultAngle('three_quarter')">
+<div class="w-full h-16 overflow-hidden bg-neutral-900">
+<img alt="3/4 View" class="w-full h-full object-cover" id="thumb-img-three_quarter" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWSQk2msKSxh8rygGH5EiXqbzQcQ-xX7G6yaREIiYjaKizAPHuhfKyzKDixy4HvO1vfOxuuqss_n-DSJFvKndZvuioIKJP8Q8Oegg7CQbwvTXIIkwz7fhaNU8QA34Mx7OiMevYdiJO9U47-tRMI_aYe8jjoUciR6Kp3lvPfHEMiVAQgAEkhDLZMqD18SQFsrKDvzFpVmducyEGoJ0NyRKlRlRhuGV19vU9B9no0Lw">
+</div>
+<span class="block text-[9px] text-center font-bold py-1 bg-surface-container text-on-surface truncate px-0.5" id="thumb-label-three_quarter">3/4 View</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-2xl p-4 border border-outline-variant/30 space-y-2.5">
+<button class="w-full py-3 px-4 rounded-xl bg-primary text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-primary-container shadow-sm transition-colors" onclick="alert('Downloading high-resolution AI Virtual Try-On photograph...')">
+<span class="material-symbols-outlined text-base">download</span>
+<span>Download AI Try-On Photo</span>
+</button>
+<button class="w-full py-2.5 px-4 rounded-xl bg-surface-container text-on-surface hover:bg-surface-container-high text-xs font-semibold flex items-center justify-center gap-2 transition-colors border border-outline-variant/30" onclick="alert('Preparing ZIP bundle of all 4 perspectives...')">
+<span class="material-symbols-outlined text-base">photo_library</span>
+<span>Download All 4 Perspectives</span>
+</button>
+<button class="w-full py-2.5 px-4 rounded-xl bg-surface-container-low text-on-surface hover:bg-surface-container text-xs font-semibold flex items-center justify-center gap-2 transition-colors border border-outline-variant/30" onclick="closeModalAndScrollToCatalog()">
+<span class="material-symbols-outlined text-base">checkroom</span>
+<span>Try Another Royal Garment</span>
+</button>
+<button class="w-full py-2.5 px-4 rounded-xl border border-primary text-primary hover:bg-primary/5 text-xs font-bold flex items-center justify-center gap-2 transition-colors" onclick="goToStep(1)">
+<span class="material-symbols-outlined text-base">add_a_photo</span>
+<span>Upload / Take Another Photo</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  const categoryData = {
+    'sarees': {
+      name: "Women's Sarees",
+      icon: "dresser",
+      categoryType: "Saree (Drape + Blouse)",
+      targetZone: "Full Body (Saree Drape & Blouse)",
+      zoneOverlayClass: "inset-x-3 bottom-3 top-2/5",
+      subcategories: [
+        { id: 'banarasi', name: 'Banarasi Sarees', count: 5 },
+        { id: 'silk', name: 'Silk Sarees', count: 3 },
+        { id: 'cotton', name: 'Cotton Sarees', count: 3 },
+        { id: 'kanjivaram', name: 'Kanjivaram Sarees', count: 3 },
+        { id: 'designer', name: 'Designer Sarees', count: 3 }
+      ]
+    },
+    'kurta': {
+      name: "Women's Kurta Sets",
+      icon: "apparel",
+      categoryType: "Kurta Set / Suit",
+      targetZone: "Full Outfit (Kurta & Bottom)",
+      zoneOverlayClass: "inset-x-3 bottom-3 top-1/4",
+      subcategories: [
+        { id: 'anarkali', name: 'Anarkali Sets', count: 3 },
+        { id: 'straight', name: 'Straight Cut', count: 3 },
+        { id: 'angrakha', name: 'Angrakha', count: 2 },
+        { id: 'peplum', name: 'Peplum Sets', count: 2 }
+      ]
+    },
+    'palazzo': {
+      name: "Girls' Palazzo",
+      icon: "styler",
+      categoryType: "Palazzo / Bottoms",
+      targetZone: "Lower Body Only (Palazzo Pants)",
+      zoneOverlayClass: "inset-x-3 bottom-3 top-1/2",
+      subcategories: [
+        { id: 'flared', name: 'Flared Palazzos', count: 3 },
+        { id: 'sharara', name: 'Sharara Cut', count: 2 },
+        { id: 'embroidered', name: 'Embroidered Palazzos', count: 2 }
+      ]
+    },
+    'kurta-palazzo': {
+      name: "Kurta-Palazzo Sets",
+      icon: "style",
+      categoryType: "Co-ord Kurta Palazzo Set",
+      targetZone: "Full Outfit (Kurta + Palazzo + Odhna)",
+      zoneOverlayClass: "inset-x-3 bottom-3 top-1/4",
+      subcategories: [
+        { id: 'chanderi-sets', name: 'Awadh Chanderi Sets', count: 2 },
+        { id: 'velvet-sets', name: 'Velvet Festive Sets', count: 2 },
+        { id: 'chikankari-sets', name: 'Lucknowi Chikankari', count: 2 },
+        { id: 'bandhani-sets', name: 'Bandhani Silk Sets', count: 2 }
+      ]
+    },
+    'dupatta': {
+      name: "Dupatta",
+      icon: "filter_vintage",
+      categoryType: "Dupatta / Accent Stole",
+      targetZone: "Accessory Drape Overlay (Torso & Shoulder)",
+      zoneOverlayClass: "inset-x-4 top-1/5 h-2/3",
+      subcategories: [
+        { id: 'banarasi-silk', name: 'Banarasi Silk', count: 2 },
+        { id: 'kashmiri-tilla', name: 'Kashmiri Tilla', count: 2 },
+        { id: 'bandhani', name: 'Bandhani', count: 2 },
+        { id: 'organza', name: 'Organza', count: 2 }
+      ]
+    },
+    'night': {
+      name: "Girls' Night Dresses",
+      icon: "bedtime",
+      categoryType: "Nightwear & Loungewear",
+      targetZone: "Full Outfit (Gown / Loungewear)",
+      zoneOverlayClass: "inset-x-3 bottom-3 top-1/4",
+      subcategories: [
+        { id: 'mulmul-gowns', name: 'Pure Mulmul Gowns', count: 2 },
+        { id: 'satin-robes', name: 'Silk Satin Robes', count: 2 },
+        { id: 'cotton-loungewear', name: 'Cotton Loungewear', count: 2 }
+      ]
+    },
+    'gowns': {
+      name: "Women's Gowns",
+      icon: "dry_cleaning",
+      categoryType: "Gown / Indo-Western Dress",
+      targetZone: "Full Outfit (Ballgown / Corset)",
+      zoneOverlayClass: "inset-x-3 bottom-3 top-1/4",
+      subcategories: [
+        { id: 'velvet-zardozi', name: 'Velvet Zardozi Gowns', count: 2 },
+        { id: 'brocade-corset', name: 'Brocade Corset Gowns', count: 2 },
+        { id: 'cape-gowns', name: 'Cape Gowns', count: 2 }
+      ]
+    }
+  };
+
+  const productCatalog = [
+    // Sarees
+    { id: 'sb1', category: 'sarees', subcategory: 'banarasi', title: 'Varanasi Royal Kadwa Brocade', tagline: 'Heirloom Bridal Edition with Floral Pallu', desc: 'Handcrafted in Varanasi on traditional pit-looms with pure silver gilded zari.', price: '₹34,500', badges: ['Pure Katan Silk', 'Kadwa Technique'], specBadge: '180 HRS WEAVE', image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=700&q=80' },
+    { id: 'sb2', category: 'sarees', subcategory: 'banarasi', title: 'Swarnachari Golden Weave', tagline: 'Mythological Miniature Narrative Borders', desc: 'Authentic handloom Swarnachari mulberry silk featuring intricate court scenes.', price: '₹28,800', badges: ['Swarnachari Silk', 'Zari Pallu'], specBadge: 'LIMITED ARCHIVE', image: 'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=700&q=80' },
+    { id: 'sb3', category: 'sarees', subcategory: 'banarasi', title: 'Meenakari Shikargah Saree', tagline: 'Imperial Hunting Motif Handloom Masterpiece', desc: 'Enriched with polychromatic Meenakari silk threads capturing royal fauna.', price: '₹48,000', badges: ['Meenakari Silk', 'Shikargah Guild'], specBadge: '240 HRS WEAVE', image: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=700&q=80' },
+    { id: 'sb4', category: 'sarees', subcategory: 'banarasi', title: 'Jangla Floral Jaal Silk Saree', tagline: 'All-Over Gold & Silver Gilded Vine Lattice', desc: 'Traditional Jangla design weaving intricate vines across rich pure Katan silk.', price: '₹31,500', badges: ['Pure Katan Silk', 'Jangla Jaal'], specBadge: 'BRIDAL GRADE', image: 'https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=700&q=80' },
+    { id: 'sb5', category: 'sarees', subcategory: 'banarasi', title: 'Katan Tanchoi Imperial Brocade', tagline: 'Satin-Finish Paisley Multi-Color Weave', desc: 'Woven with no floating threads on reverse, delivering feather-light regal comfort.', price: '₹22,000', badges: ['Katan Tanchoi', 'Satin Finish'], specBadge: 'LIGHTWEIGHT', image: 'https://images.unsplash.com/photo-1610030469668-93510cb67655?auto=format&fit=crop&w=700&q=80' },
+    { id: 'ss1', category: 'sarees', subcategory: 'silk', title: 'Pure Mulberry Kanchipuram Silk', tagline: 'Korvai Interlocked Border in Regal Crimson', desc: 'Heavy 3-ply mulberry silk with authentic tested gold zari.', price: '₹26,500', badges: ['Mulberry Silk', 'Korvai Technique'], specBadge: 'TEMPLE WEAVE', image: 'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=700&q=80' },
+    { id: 'sk1', category: 'sarees', subcategory: 'kanjivaram', title: 'Royal Crimson Kanjivaram Bridal Silk', tagline: 'Pure Zari Pallu with Annapakshi Motifs', desc: 'Heirloom heavy weight silk woven with pure silver zari washed in real gold.', price: '₹42,000', badges: ['Bridal Silk', 'Pure Gold Zari'], specBadge: 'TRIPLE WARP', image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=700&q=80' },
+    // Kurta Sets
+    { id: 'ks1', category: 'kurta', subcategory: 'straight', title: 'Raw Silk Straight Kurta with Cigarette Pants', tagline: 'Classic Straight Cut with Tilla Border Detailing', desc: 'Tailored straight-cut raw silk kurta lined with fine cotton, paired with slim trousers.', price: '₹14,200', badges: ['Raw Silk', 'Straight Cut'], specBadge: 'TAILORED CUT', image: 'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=700&q=80' },
+    { id: 'ks2', category: 'kurta', subcategory: 'straight', title: 'Imperial Ivory Chanderi Straight Kurta Set', tagline: 'Gota Patti Hemline with Straight Cut Trousers', desc: 'Graceful straight-silhouette woven Chanderi kurta with hand-beaded cuffs and side slits.', price: '₹18,500', badges: ['Pure Chanderi', 'Gota Patti'], specBadge: 'CONTEMPORARY CLASSIC', image: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=700&q=80' },
+    { id: 'ks3', category: 'kurta', subcategory: 'straight', title: 'Emerald Charkha Straight Tunic & Pants', tagline: 'Handloom Cotton-Silk Straight Fit', desc: 'Minimalist royal straight cut with gold bullion buttons and tailored side vent slits.', price: '₹12,800', badges: ['Cotton-Silk', 'Tailored Cut'], specBadge: 'BESPOKE FIT', image: 'https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=700&q=80' },
+    { id: 'ka1', category: 'kurta', subcategory: 'anarkali', title: 'Noor-e-Awadh Chanderi Anarkali Set', tagline: 'Heavy Kalidar Flare with Mukaish Dupatta', desc: 'Pure Chanderi silk with 32 kalis, gold mukaish badla dots and tonal churidar.', price: '₹24,500', badges: ['Chanderi Silk', '32 Kalis'], specBadge: '32 KALI FLARE', image: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=700&q=80' },
+    { id: 'ka2', category: 'kurta', subcategory: 'anarkali', title: 'Velvet Zardozi Flared Bridal Anarkali', tagline: 'Plush Silk Velvet Bodice with Kashmiri Tilla', desc: 'Deep crimson silk velvet paired with pure organza skirt.', price: '₹36,000', badges: ['Silk Velvet', 'Zardozi'], specBadge: 'HEIRLOOM BRIDAL', image: 'https://images.unsplash.com/photo-1610030469668-93510cb67655?auto=format&fit=crop&w=700&q=80' },
+    // Palazzo
+    { id: 'pf1', category: 'palazzo', subcategory: 'flared', title: 'Ivory Chanderi Gold-Border Flared Palazzo', tagline: 'Wide Umbrella Leg Flare with Gilded Edge', desc: 'Feather-soft pure Chanderi silk palazzo pants with sweeping circular flare. Replaces bottom wear only.', price: '₹4,800', badges: ['Chanderi Silk', 'Gold Border'], specBadge: '3.5M CIRCLE FLARE', image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=700&q=80' },
+    { id: 'ps1', category: 'palazzo', subcategory: 'sharara', title: 'Zari Booti Tiered Sharara Palazzo', tagline: 'Knee-Gathered Double Layer with Gold Gota', desc: 'Classic Awadhi court silhouette gathered into voluminous double tiers.', price: '₹6,900', badges: ['Awadh Cut', 'Gold Gota'], specBadge: 'DOUBLE TIER', image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80' },
+    // Kurta Palazzo Sets
+    { id: 'kps1', category: 'kurta-palazzo', subcategory: 'chanderi-sets', title: 'Awadh Courtyard Chanderi Kurta-Palazzo Set', tagline: 'Hand-Spun Silk Kurta with Matching Flared Palazzo', desc: 'Complete 3-piece coordinated royal ensemble with delicate zardozi neckline.', price: '₹16,500', badges: ['Chanderi Silk', 'Awadh Court'], specBadge: '3-PIECE SET', image: 'https://images.unsplash.com/photo-1610030469668-93510cb67655?auto=format&fit=crop&w=700&q=80' },
+    // Dupatta
+    { id: 'dp1', category: 'dupatta', subcategory: 'banarasi-silk', title: 'Banarasi Katan Silk Floral Jaal Dupatta', tagline: 'Grand Bridal Odhna with Intricate Gold Zari Jaal', desc: 'Pure Katan silk hand-woven with dense kadwa jaal motifs. Drapes dynamically over torso & shoulders.', price: '₹8,500', badges: ['Pure Katan Silk', 'Zari Jaal'], specBadge: '2.5M BRIDAL', image: 'https://images.unsplash.com/photo-1609357605129-26f69add5d6e?auto=format&fit=crop&w=700&q=80' },
+    { id: 'dp3', category: 'dupatta', subcategory: 'kashmiri-tilla', title: 'Kashmiri Tilla Work Pure Pashmina Dupatta', tagline: 'Hand-Spun Grade-A Cashmere with Gilded Border', desc: 'Authentic Ladakhi pashmina wool embroidered with pure silver & gold wire accent overlay.', price: '₹9,800', badges: ['Grade-A Pashmina', 'Kashmiri Tilla'], specBadge: 'RING PASHMINA', image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=700&q=80' },
+    // Night Dresses
+    { id: 'gnd1', category: 'night', subcategory: 'mulmul-gowns', title: 'Pure Mulmul Tiered Night Gown', tagline: 'Featherweight Breathable Gown with Eyelet Embroidery', desc: 'Woven from airy 100-count royal mulmul cotton with delicate lace shoulder straps.', price: '₹4,200', badges: ['Pure Mulmul', 'Eyelet Lace'], specBadge: 'CLOUD COTTON', image: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&w=700&q=80' },
+    // Gowns
+    { id: 'wg1', category: 'gowns', subcategory: 'velvet-zardozi', title: 'Mughal Empress Deep Wine Velvet Gown', tagline: 'Flared Ballgown with Hand-Hewn Zardozi Cuffs', desc: 'Velvet ballgown with boned corset support and gold French wire foliage work.', price: '₹42,000', badges: ['Silk Velvet', 'Boned Corset'], specBadge: '140 HRS HAND HEWN', image: 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=700&q=80' }
+  ];
+
+  let activeCategory = 'sarees';
+  let activeSubcategory = 'banarasi';
+  let currentSearchTerm = '';
+  // Sort State: 'high-low' (default matching reference), 'low-high', 'curated'
+  let currentSortMode = 'high-low';
+  let currentTryOnProduct = productCatalog[0];
+  let uploadedUserPhoto = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80';
+  let currentRenderedAngle = 'front';
+  let cameraMediaStream = null;
+  let synthesisInterval = null;
+  let activeScrollAnimation = null;
+
+  // Atelier Owner Lightbox Handlers
+  function openOwnerPortraitLightbox() {
+    const modal = document.getElementById('owner-portrait-modal');
+    const content = document.getElementById('owner-portrait-content');
+    if (!modal || !content) return;
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    setTimeout(() => {
+      modal.classList.remove('opacity-0');
+      modal.classList.add('opacity-100');
+      content.classList.remove('scale-95');
+      content.classList.add('scale-100');
+    }, 10);
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeOwnerPortraitLightbox() {
+    const modal = document.getElementById('owner-portrait-modal');
+    const content = document.getElementById('owner-portrait-content');
+    if (!modal || !content) return;
+    modal.classList.add('opacity-0');
+    modal.classList.remove('opacity-100');
+    content.classList.add('scale-95');
+    content.classList.remove('scale-100');
+    setTimeout(() => {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      const aiModal = document.getElementById('ai-modal');
+      if (aiModal && aiModal.classList.contains('hidden')) {
+        document.body.style.overflow = '';
+      }
+    }, 280);
+  }
+
+  function handleOwnerModalBackdrop(event) {
+    if (event.target.id === 'owner-portrait-modal') {
+      closeOwnerPortraitLightbox();
+    }
+  }
+
+  // Keyboard accessibility
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' || e.key === 'Esc') {
+      const ownerModal = document.getElementById('owner-portrait-modal');
+      if (ownerModal && !ownerModal.classList.contains('hidden')) {
+        closeOwnerPortraitLightbox();
+      }
+      const aiModal = document.getElementById('ai-modal');
+      if (aiModal && !aiModal.classList.contains('hidden')) {
+        closeAITryOnModal();
+      }
+      closeSortDropdown();
+    }
+  });
+
+  // Sort Dropdown and Reordering Logic
+  function toggleSortDropdown(event) {
+    if (event) event.stopPropagation();
+    const menu = document.getElementById('sort-menu');
+    const chevron = document.getElementById('sort-chevron-icon');
+    if (!menu) return;
+    const isHidden = menu.classList.contains('hidden');
+    if (isHidden) {
+      menu.classList.remove('hidden');
+      if (chevron) chevron.classList.add('rotate-180');
+    } else {
+      closeSortDropdown();
+    }
+  }
+
+  function closeSortDropdown() {
+    const menu = document.getElementById('sort-menu');
+    const chevron = document.getElementById('sort-chevron-icon');
+    if (menu) menu.classList.add('hidden');
+    if (chevron) chevron.classList.remove('rotate-180');
+  }
+
+  window.addEventListener('click', (e) => {
+    const container = document.getElementById('sort-dropdown-container');
+    if (container && !container.contains(e.target)) {
+      closeSortDropdown();
+    }
+  });
+
+  function applySortOption(mode) {
+    currentSortMode = mode;
+    closeSortDropdown();
+    updateSortUI();
+    renderProducts();
+    const container = document.getElementById('product-container');
+    highlightTargetItems(container);
+  }
+
+  function updateSortUI() {
+    const label = document.getElementById('sort-label');
+    const checkHighLow = document.getElementById('check-high-low');
+    const checkLowHigh = document.getElementById('check-low-high');
+    const checkCurated = document.getElementById('check-curated');
+
+    if (checkHighLow) checkHighLow.classList.add('hidden');
+    if (checkLowHigh) checkLowHigh.classList.add('hidden');
+    if (checkCurated) checkCurated.classList.add('hidden');
+
+    if (currentSortMode === 'high-low') {
+      if (label) label.textContent = 'Sort: Price (High-Low)';
+      if (checkHighLow) checkHighLow.classList.remove('hidden');
+    } else if (currentSortMode === 'low-high') {
+      if (label) label.textContent = 'Sort: Price (Low-High)';
+      if (checkLowHigh) checkLowHigh.classList.remove('hidden');
+    } else {
+      if (label) label.textContent = 'Sort: Curated';
+      if (checkCurated) checkCurated.classList.remove('hidden');
+    }
+  }
+
+  // Helper to extract clean numeric price
+  function getNumericPrice(priceStr) {
+    if (!priceStr) return 0;
+    const clean = priceStr.toString().replace(/[^\d]/g, '');
+    return parseInt(clean, 10) || 0;
+  }
+
+  // Smooth Slow Scroll for gentle, luxurious Haute Couture feel
+  function smoothSlowScrollToTarget(targetElement, duration = 950) {
+    if (!targetElement) return;
+    if (activeScrollAnimation) cancelAnimationFrame(activeScrollAnimation);
+
+    const header = document.getElementById('main-header');
+    const headerOffset = header ? header.offsetHeight + 24 : 100;
+    const elementPosition = targetElement.getBoundingClientRect().top;
+    const startPosition = window.pageYOffset || document.documentElement.scrollTop;
+    const targetPosition = elementPosition + startPosition - headerOffset;
+    const distance = targetPosition - startPosition;
+
+    let startTime = null;
+
+    function easeInOutCubic(t) {
+      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easeProgress = easeInOutCubic(progress);
+
+      window.scrollTo(0, startPosition + distance * easeProgress);
+
+      if (progress < 1) {
+        activeScrollAnimation = requestAnimationFrame(step);
+      } else {
+        activeScrollAnimation = null;
+        highlightTargetItems(targetElement);
+      }
+    }
+
+    activeScrollAnimation = requestAnimationFrame(step);
+  }
+
+  function highlightTargetItems(container) {
+    if (!container) return;
+    const cards = container.querySelectorAll('[data-product-card="true"]');
+    if (cards && cards.length > 0) {
+      cards.forEach((card, index) => {
+        setTimeout(() => {
+          card.classList.add('regal-spotlight-active');
+          setTimeout(() => {
+            card.classList.remove('regal-spotlight-active');
+          }, 1400);
+        }, index * 80);
+      });
+    } else {
+      container.classList.add('regal-spotlight-active');
+      setTimeout(() => {
+        container.classList.remove('regal-spotlight-active');
+      }, 1400);
+    }
+  }
+
+  function resetToHome() {
+    activeCategory = 'sarees';
+    activeSubcategory = 'banarasi';
+    currentSortMode = 'high-low';
+    updateSortUI();
+    updateCategoryHeaderUI();
+    renderSidebar();
+    renderHorizontalChips();
+    renderProducts();
+    const target = document.getElementById('catalog-header-section') || document.getElementById('product-container');
+    smoothSlowScrollToTarget(target, 700);
+  }
+
+  function renderSidebar() {
+    const list = document.getElementById('category-sidebar-list');
+    if (!list) return;
+    list.innerHTML = '';
+
+    Object.keys(categoryData).forEach((catKey, index) => {
+      const cat = categoryData[catKey];
+      const isActive = (catKey === activeCategory);
+      
+      const card = document.createElement('div');
+      card.className = `bg-surface-container-lowest rounded-xl p-3 border transition-all ${isActive ? 'border-primary/40 shadow-xs' : 'border-transparent'}`;
+      card.id = `cat-card-${catKey}`;
+
+      let pillsHtml = '';
+      cat.subcategories.forEach(sub => {
+        const isSubActive = (isActive && sub.id === activeSubcategory);
+        pillsHtml += `
+          <button onclick="selectSubcategory('${catKey}', '${sub.id}', event)" class="px-2.5 py-1 rounded-full text-xs transition-all ${isSubActive ? 'bg-[#58111A] text-white font-bold shadow-xs ring-1 ring-amber-300/40' : 'bg-surface-container text-on-surface hover:text-primary hover:bg-surface-container-high font-medium'}">
+            ${sub.name}
+          </button>
+        `;
+      });
+
+      card.innerHTML = `
+        <button onclick="toggleCategoryAccordion('${catKey}')" class="w-full flex items-center justify-between text-left focus:outline-none">
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-full ${isActive ? 'bg-[#58111A] text-white' : 'bg-surface-container-high text-on-surface-variant'} flex items-center justify-center text-sm flex-shrink-0 shadow-xs">
+              <span class="material-symbols-outlined text-[17px]">${cat.icon}</span>
+            </span>
+            <div>
+              <p class="font-headline text-sm font-bold ${isActive ? 'text-primary' : 'text-on-surface'} leading-tight">${index + 1}. ${cat.name}</p>
+              <p class="text-[10px] text-secondary font-medium">${isActive ? 'Active: ' + (cat.subcategories.find(s=>s.id===activeSubcategory)?.name || 'Browsing') : ''}</p>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-lg ${isActive ? 'text-primary' : 'text-on-surface-variant'}">${isActive ? 'expand_less' : 'expand_more'}</span>
+        </button>
+        <div class="${isActive ? 'flex' : 'hidden'} mt-2.5 pt-2 border-t border-outline-variant/15 flex-wrap gap-1.5" id="pills-${catKey}">
+          ${pillsHtml}
+        </div>
+      `;
+      list.appendChild(card);
+    });
+  }
+
+  function renderHorizontalChips() {
+    const bar = document.getElementById('horizontal-chips-bar');
+    if (!bar) return;
+    bar.innerHTML = '';
+    const cat = categoryData[activeCategory];
+    if (!cat) return;
+
+    cat.subcategories.forEach(sub => {
+      const isSelected = (sub.id === activeSubcategory);
+      const btn = document.createElement('button');
+      btn.className = `px-3.5 py-1.5 rounded-full text-xs whitespace-nowrap transition-all flex items-center gap-1.5 ${isSelected ? 'bg-[#58111A] text-white font-bold shadow-xs ring-1 ring-amber-300/40' : 'bg-surface-container-low text-on-surface-variant hover:text-primary hover:bg-surface-container font-medium'}`;
+      btn.innerHTML = `<span>${sub.name}</span><span class="text-[10px] opacity-75">(${sub.count})</span>`;
+      btn.onclick = (e) => selectSubcategory(activeCategory, sub.id, e);
+      bar.appendChild(btn);
+    });
+  }
+
+  function renderProducts() {
+    const container = document.getElementById('product-container');
+    if (!container) return;
+    container.innerHTML = '';
+
+    let items = productCatalog.filter(p => {
+      const matchCat = (p.category === activeCategory);
+      const matchSub = (!activeSubcategory || p.subcategory === activeSubcategory);
+      const matchSearch = (!currentSearchTerm || p.title.toLowerCase().includes(currentSearchTerm) || p.desc.toLowerCase().includes(currentSearchTerm));
+      return matchCat && matchSub && matchSearch;
+    });
+
+    // Dynamic Price / Curated Sorting
+    items.sort((a, b) => {
+      const priceA = getNumericPrice(a.price);
+      const priceB = getNumericPrice(b.price);
+      if (currentSortMode === 'high-low') {
+        return priceB - priceA;
+      } else if (currentSortMode === 'low-high') {
+        return priceA - priceB;
+      } else {
+        return a.id.localeCompare(b.id);
+      }
+    });
+
+    if (items.length === 0) {
+      container.innerHTML = `
+        <div class="col-span-full py-16 text-center bg-surface-container-lowest rounded-2xl border border-dashed border-outline-variant p-8">
+          <span class="material-symbols-outlined text-4xl text-outline mb-2">inventory_2</span>
+          <p class="font-headline text-lg font-bold text-primary">No pieces found in this subcategory</p>
+          <p class="text-xs text-on-surface-variant mt-1">Try switching subcategories or explore other Royal Departments</p>
+        </div>
+      `;
+      return;
+    }
+
+    items.forEach(product => {
+      const catConfig = categoryData[product.category] || categoryData['sarees'];
+      const card = document.createElement('div');
+      card.setAttribute('data-product-card', 'true');
+      card.className = "group bg-surface-container-lowest rounded-2xl overflow-hidden border border-outline-variant/30 hover:border-primary/40 hover:shadow-lg transition-all flex flex-col";
+      card.id = `product-item-${product.id}`;
+
+      card.innerHTML = `
+        <div class="relative aspect-[3/4] overflow-hidden bg-neutral-100">
+          <img src="${product.image}" alt="${product.title}" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"/>
+          <div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+            ${product.badges.map(b => `<span class="bg-black/60 backdrop-blur-md text-white text-[9px] uppercase tracking-wider font-bold px-2 py-0.5 rounded">${b}</span>`).join('')}
+          </div>
+          <span class="absolute bottom-3 left-3 bg-primary-container text-amber-200 text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">
+            ${product.specBadge}
+          </span>
+          <div class="absolute top-3 right-3 flex flex-col gap-1.5">
+            <button class="w-8 h-8 rounded-full bg-white/90 text-primary flex items-center justify-center hover:bg-white shadow">
+              <span class="material-symbols-outlined text-base">favorite</span>
+            </button>
+          </div>
+        </div>
+        <div class="p-4 flex-1 flex flex-col justify-between">
+          <div>
+            <div class="flex items-baseline justify-between gap-2">
+              <h3 class="font-headline text-base font-bold text-primary group-hover:text-primary-container leading-tight">${product.title}</h3>
+              <span class="font-bold text-sm text-primary flex-shrink-0">${product.price}</span>
+            </div>
+            <div class="flex items-center gap-1.5 mt-0.5">
+              <span class="text-[10px] text-amber-900 bg-amber-100/80 font-bold px-2 py-0.2 rounded">${catConfig.categoryType}</span>
+              <p class="text-[11px] text-secondary font-medium line-clamp-1">${product.tagline}</p>
+            </div>
+            <p class="text-xs text-on-surface-variant mt-1.5 line-clamp-2 leading-relaxed">${product.desc}</p>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-outline-variant/20 flex flex-col gap-2">
+            <button onclick="handleTryThisVirtuallyClick('${product.id}')" class="w-full py-2.5 px-3 rounded-xl bg-primary-container text-amber-200 hover:bg-primary text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm transition-all group-hover:shadow-md">
+              <span class="material-symbols-outlined text-base text-amber-300 animate-pulse">auto_awesome</span>
+              <span>TRY THIS VIRTUALLY (AI FIT 3.0)</span>
+            </button>
+          </div>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  function toggleCategoryAccordion(catKey) {
+    if (activeCategory === catKey) return;
+    activeCategory = catKey;
+    const cat = categoryData[catKey];
+    activeSubcategory = cat.subcategories[0]?.id || '';
+    updateCategoryHeaderUI();
+    renderSidebar();
+    renderHorizontalChips();
+    renderProducts();
+
+    const target = document.getElementById('catalog-header-section') || document.getElementById('product-container');
+    smoothSlowScrollToTarget(target, 900);
+  }
+
+  function selectSubcategory(catKey, subId, event) {
+    if (event) event.stopPropagation();
+    activeCategory = catKey;
+    activeSubcategory = subId;
+    updateCategoryHeaderUI();
+    renderSidebar();
+    renderHorizontalChips();
+    renderProducts();
+
+    const target = document.getElementById('product-container') || document.getElementById('catalog-header-section');
+    smoothSlowScrollToTarget(target, 950);
+  }
+
+  function updateCategoryHeaderUI() {
+    const cat = categoryData[activeCategory] || categoryData['sarees'];
+    const sub = cat.subcategories.find(s => s.id === activeSubcategory);
+    const subName = sub ? sub.name : 'All Curations';
+    
+    document.getElementById('breadcrumb-category').textContent = cat.name;
+    document.getElementById('breadcrumb-subcategory').textContent = subName;
+    document.getElementById('display-title').textContent = subName;
+    document.getElementById('display-subtitle').textContent = `Showing curated royal creations in ${cat.name} > ${subName}`;
+  }
+
+  function handleTryThisVirtuallyClick(productId) {
+    const product = productCatalog.find(p => p.id === productId) || productCatalog[0];
+    openAITryOnModal(product);
+  }
+
+  function openTryOnForFirstItem() {
+    openAITryOnModal(productCatalog[0]);
+  }
+
+  function openAITryOnModal(product) {
+    currentTryOnProduct = product;
+    const catConfig = categoryData[product.category] || categoryData['sarees'];
+    
+    document.getElementById('selected-garment-thumb').src = product.image;
+    document.getElementById('selected-garment-title').textContent = product.title;
+    document.getElementById('selected-garment-cat').textContent = catConfig.name;
+    document.getElementById('selected-garment-zone-badge').textContent = `Target: ${catConfig.targetZone}`;
+    document.getElementById('selected-garment-price').textContent = product.price;
+
+    document.getElementById('spec-card-thumb').src = product.image;
+    document.getElementById('spec-card-department').textContent = `Department: ${catConfig.name}`;
+    document.getElementById('spec-card-title').textContent = product.title;
+    document.getElementById('spec-card-type-desc').textContent = `Category Type: ${catConfig.categoryType} • Target Zone: ${catConfig.targetZone}`;
+    document.getElementById('spec-card-price').textContent = product.price;
+
+    goToStep(1);
+
+    const modal = document.getElementById('ai-modal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeAITryOnModal() {
+    stopCameraStream();
+    if (synthesisInterval) clearInterval(synthesisInterval);
+    const modal = document.getElementById('ai-modal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.body.style.overflow = '';
+  }
+
+  function handleBackdropClick(event) {
+    if (event.target.id === 'ai-modal') {
+      closeAITryOnModal();
+    }
+  }
+
+  function closeModalAndScrollToCatalog() {
+    closeAITryOnModal();
+    const target = document.getElementById('product-container');
+    smoothSlowScrollToTarget(target, 900);
+  }
+
+  function goToStep(stepNum) {
+    for (let i = 1; i <= 4; i++) {
+      const stepEl = document.getElementById(`tryon-step-${i}`);
+      const navEl = document.getElementById(`step-nav-${i}`);
+      if (stepEl) stepEl.classList.add('hidden');
+      if (navEl) {
+        navEl.classList.remove('text-primary', 'font-bold');
+        navEl.classList.add('opacity-40');
+      }
+    }
+
+    const currentStepEl = document.getElementById(`tryon-step-${stepNum}`);
+    const currentNavEl = document.getElementById(`step-nav-${stepNum}`);
+    if (currentStepEl) currentStepEl.classList.remove('hidden');
+    if (currentNavEl) {
+      currentNavEl.classList.remove('opacity-40');
+      currentNavEl.classList.add('text-primary', 'font-bold');
+    }
+
+    if (stepNum !== 1) {
+      stopCameraStream();
+    }
+  }
+
+  function triggerFileInput() {
+    document.getElementById('tryon-file-input').click();
+  }
+
+  function handleFileSelect(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        uploadedUserPhoto = e.target.result;
+        proceedToStep2Preview();
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  async function startCameraCapture() {
+    const box = document.getElementById('camera-viewfinder-box');
+    const video = document.getElementById('camera-video');
+
+    try {
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        alert("Camera access is not supported by your browser. Please use 'Upload from Gallery'.");
+        return;
+      }
+      box.classList.remove('hidden');
+      cameraMediaStream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: 'user', width: { ideal: 1280 }, height: { ideal: 720 } }
+      });
+      video.srcObject = cameraMediaStream;
+      video.play();
+    } catch (err) {
+      alert("Camera permission denied or unavailable. Please select 'Upload from Gallery'.");
+      box.classList.add('hidden');
+    }
+  }
+
+  function stopCameraStream() {
+    if (cameraMediaStream) {
+      cameraMediaStream.getTracks().forEach(track => track.stop());
+      cameraMediaStream = null;
+    }
+    const box = document.getElementById('camera-viewfinder-box');
+    if (box) box.classList.add('hidden');
+  }
+
+  function captureCameraPhoto() {
+    const video = document.getElementById('camera-video');
+    const canvas = document.getElementById('camera-canvas');
+    if (!video || !canvas) return;
+    canvas.width = video.videoWidth || 640;
+    canvas.height = video.videoHeight || 480;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    uploadedUserPhoto = canvas.toDataURL('image/jpeg', 0.9);
+    stopCameraStream();
+    proceedToStep2Preview();
+  }
+
+  function proceedToStep2Preview() {
+    document.getElementById('preview-user-photo').src = uploadedUserPhoto;
+    goToStep(2);
+  }
+
+  function quickStartNeuralSynthesis() {
+    goToStep(3);
+    let progress = 15;
+    const bar = document.getElementById('synthesis-progress-bar');
+    const pct = document.getElementById('synthesis-percentage');
+    const statusText = document.getElementById('synthesis-status-text');
+
+    synthesisInterval = setInterval(() => {
+      progress += 28;
+      if (progress >= 100) {
+        progress = 100;
+        clearInterval(synthesisInterval);
+        setTimeout(showStep4Results, 200);
+      }
+      bar.style.width = progress + '%';
+      pct.textContent = progress + '%';
+      if (progress > 50) statusText.textContent = "Executing Stage 4: Fabric Draping & Inpainting...";
+    }, 120);
+  }
+
+  function showStep4Results() {
+    document.getElementById('originalPhotoCompare').src = uploadedUserPhoto;
+    document.getElementById('result-draped-img').src = currentTryOnProduct.image;
+    document.getElementById('interactive-toggle-img').src = currentTryOnProduct.image;
+    document.getElementById('thumb-img-front').src = currentTryOnProduct.image;
+    document.getElementById('thumb-img-back').src = currentTryOnProduct.image;
+    document.getElementById('thumb-img-side').src = currentTryOnProduct.image;
+    document.getElementById('thumb-img-three_quarter').src = currentTryOnProduct.image;
+    document.getElementById('result-garment-title').textContent = currentTryOnProduct.title;
+    goToStep(4);
+  }
+
+  function switchResultAngle(angle) {
+    currentRenderedAngle = angle;
+    ['front', 'back', 'side', 'three_quarter'].forEach(a => {
+      const el = document.getElementById(`thumb-angle-${a}`);
+      if (el) {
+        if (a === angle) {
+          el.classList.add('border-primary', 'shadow-sm');
+          el.classList.remove('border-transparent');
+        } else {
+          el.classList.remove('border-primary', 'shadow-sm');
+          el.classList.add('border-transparent');
+        }
+      }
+    });
+    document.getElementById('active-angle-badge').textContent = angle.toUpperCase() + ' VIEW';
+  }
+
+  function setResultComparisonMode(mode) {
+    const split = document.getElementById('comparison-container-split');
+    const toggle = document.getElementById('comparison-container-toggle');
+    const btnSplit = document.getElementById('view-mode-split');
+    const btnToggle = document.getElementById('view-mode-toggle');
+
+    if (mode === 'split') {
+      split.classList.remove('hidden');
+      toggle.classList.add('hidden');
+      btnSplit.classList.add('bg-primary', 'text-white');
+      btnSplit.classList.remove('text-on-surface');
+      btnToggle.classList.remove('bg-primary', 'text-white');
+      btnToggle.classList.add('text-on-surface');
+    } else {
+      split.classList.add('hidden');
+      toggle.classList.remove('hidden');
+      btnToggle.classList.add('bg-primary', 'text-white');
+      btnToggle.classList.remove('text-on-surface');
+      btnSplit.classList.remove('bg-primary', 'text-white');
+      btnSplit.classList.add('text-on-surface');
+    }
+  }
+
+  let singleViewIsResult = true;
+  function toggleSingleView() {
+    singleViewIsResult = !singleViewIsResult;
+    const img = document.getElementById('interactive-toggle-img');
+    const badgeText = document.getElementById('interactive-toggle-badgetext');
+    const btnLabel = document.getElementById('toggle-button-label');
+
+    if (singleViewIsResult) {
+      img.src = currentTryOnProduct.image;
+      badgeText.textContent = "AI Try-On Result";
+      btnLabel.textContent = "Press to View Original";
+    } else {
+      img.src = uploadedUserPhoto;
+      badgeText.textContent = "Original Photo";
+      btnLabel.textContent = "Press to View AI Result";
+    }
+  }
+
+  // Initialize
+  document.addEventListener('DOMContentLoaded', () => {
+    updateSortUI();
+    renderSidebar();
+    renderHorizontalChips();
+    renderProducts();
+  });
+</script>
+
+
+</body></html>
